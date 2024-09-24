@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#page-login {}
+
+#login-section {}
+
+#info-login-section {}
