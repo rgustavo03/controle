@@ -7,13 +7,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 
 const userSchema = z.object({
-  empresaId: z.coerce.number(),
-  login: z.string(),
-  senha: z.string()
+  empresaId: z.coerce.number().min(1),
+  login: z.string().min(1),
+  senha: z.string().min(1)
 });
 
 
-export default function LoginForm({logar}) {
+export default function LoginForm({login}) {
 
 
   const { register, handleSubmit } = useForm({
@@ -22,7 +22,7 @@ export default function LoginForm({logar}) {
 
 
   const submitLogin = (data) => {
-    logar(data);
+    login(data);
   }
 
 

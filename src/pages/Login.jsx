@@ -31,7 +31,7 @@ export default function Login() {
 
 
   // função é chamada em componente FormLogin
-  const logar = (dataUser) => {
+  const login = (dataUser) => {
     setUser(dataUser);
   }
 
@@ -87,7 +87,7 @@ export default function Login() {
     <div id="page-login" className="flex flex-row">
 
       <section id="login-section" className="w-96 p-32">
-        <LoginForm logar={logar} />
+        <LoginForm login={login} />
       </section>
 
       <section id="info-login-section" className=""></section>

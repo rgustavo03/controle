@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default async function deleteAlmoxarifado(token, id) {
+export default async function deleteAlmoxarifado(token, id, updateListAlmoxarifados) {
 
   try {
     await axios.delete(
@@ -11,7 +11,10 @@ export default async function deleteAlmoxarifado(token, id) {
     )
     .then(res => {
 
-      if(res.data.status == 200) console.log(res.data.message);
+      if(res.data.status == 200) {
+        updateListAlmoxarifados();
+        console.log(res.data.message);
+      }
 
       else console.log("Erro");
 
