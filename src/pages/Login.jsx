@@ -1,21 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LoginForm from "../ui/partials/LoginForm";
 import axios from "axios";
 import useSession from "../hooks/useSession";
 
 export default function Login() {
 
-  const { startSession, checkSession } = useSession();
+  const [active, setActive] = useState(false); // pagina ativa ou não
+
+  const navigate = useNavigate(); // redirecionar páginas
+
+  const { startSession, checkSession } = useSession(); // funções de sessão do usuário
 
 
   useEffect(() => {
     const isLogged = checkSession();
 
-    if(isLogged) {
-      console.log('logado')
-      redirect('/controle'); // redirecionar para página controle
+    if(!isLogged) {
+      setActive(true);
+      return
     }
+
+    navigate('/controle'); // redirecionar para página controle
   }, []);
 
 
@@ -24,6 +30,7 @@ export default function Login() {
   );
 
 
+  // função é chamada em componente FormLogin
   const logar = (dataUser) => {
     setUser(dataUser);
   }
@@ -37,7 +44,7 @@ export default function Login() {
 
   const fetchLogin = async () => {
     try {
-      const response = await axios.post(
+      await axios.post(
 
         'https://compsysweb.pdvfiscal.com.br/api/v1/login-empresas',
         { empresaId: user.empresaId, login: user.login, senha: user.senha }
@@ -71,21 +78,19 @@ export default function Login() {
 
     startSession(token, expiration);
 
-    // redirecionar para pagina almoxarifado
+    navigate('/controle'); // redirecionar para página controle
   }
 
 
 
-  return (
+  if(active) return (
     <div id="page-login" className="flex flex-row">
 
       <section id="login-section" className="w-96 p-32">
         <LoginForm logar={logar} />
       </section>
 
-      <section id="info-login-section" className="">
-        //
-      </section>
+      <section id="info-login-section" className=""></section>
 
     </div>
   )

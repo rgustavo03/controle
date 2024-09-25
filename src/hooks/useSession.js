@@ -27,8 +27,15 @@ export default function useSession() {
     if(expDate > actualDate) return true // dentro do tempo limite de login
 
     // tempo de login excedido
-    setStorage({}); // usuario vazio
+    setStorage({}); // usuario no Storage vazio
+    setUser({}); // usuario vazio
     return false
+  }
+
+
+
+  const getToken = () => {
+    return user.token
   }
 
 
@@ -39,45 +46,5 @@ export default function useSession() {
 
 
 
-  return { startSession, checkSession }
+  return { startSession, checkSession, getToken }
 }
-
-
-
-/*
-
-https://compsysweb.pdvfiscal.com.br/api/v1/almoxarifado/listar
-
-{
-  "data": [
-    {
-      "id": 1,
-      "empresaId": 1,
-      "descricao": "PRINCIPAL",
-      "tipo": 1,
-      "usuarioId": 0,
-      "dataInclusao": "2024-08-20T01:25:16.643044",
-      "dataAlteracao": null,
-      "dataExclusao": null
-    }
-  ],
-  "message": "",
-  "status": 200,
-  "notificacoes": null
-}
-
-// =======================
-
-"data": [
-  {
-    "id": 1,
-    "empresaId": 1,
-    "descricao": "PRINCIPAL",
-    "tipo": 1,
-    "usuarioId": 0,
-    "dataInclusao": "2024-08-20T01:25:16.643044",
-    "dataAlteracao": null,
-    "dataExclusao": null
-  }
-]
-*/
