@@ -53,7 +53,7 @@ export default function Login() {
       .then(res => {
 
         if(res.data.status == 200) connection(res.data); // sucesso conexão
-        else if (res.data.status == 401) invalid(res.data.message); // erro conexão
+        else invalid(res.data.message); // erro conexão
 
       });
     }
@@ -84,13 +84,13 @@ export default function Login() {
 
 
   if(active) return (
-    <div id="page-login" className="flex flex-row">
+    <div id="page-login" className="flex flex-row h-screen">
 
-      <section id="login-section" className="w-96 p-32">
+      <section id="login-section" className="p-20 flex justify-center">
         <LoginForm login={login} />
       </section>
 
-      <section id="info-login-section" className=""></section>
+      <section id="info-login-section" className="flex-auto bg-slate-900"></section>
 
     </div>
   )

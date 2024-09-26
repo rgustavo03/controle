@@ -6,6 +6,7 @@ import getAlmoxarifados from "../services/getAlmoxarifados";
 import deleteAlmoxarifado from "../services/deleteAlmoxarifado";
 import AddAlmoxarifado from "../ui/partials/AddAlmoxarifado";
 import AlterAlmoxarifado from "../ui/partials/AlterAlmoxarifado";
+import AlmoxarifadoHeader from "../ui/partials/AlmoxarifadoHeader";
 
 
 const objEmpty = {
@@ -88,6 +89,8 @@ export default function Controller() {
 
   if(active) return (
     <div id="content">
+
+      <AlmoxarifadoHeader />
 
       <AddAlmoxarifado updateListAlmoxarifados={updateListAlmoxarifados} token={getToken()} />
 
