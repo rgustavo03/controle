@@ -16,25 +16,25 @@ export const LineItem = ({item, altItem, deleteItem}) => {
 
 
   return (
-    <tr>
+    <tr className="border-y border-y-neutral-200">
 
-      <td>
+      <td className="cell-table-almoxarifado">
         {item.id}
       </td>
 
-      <td>
+      <td className="cell-table-almoxarifado">
         {item.empresaId}
       </td>
 
-      <td>
+      <td className="cell-table-almoxarifado">
         {item.descricao}
       </td>
 
-      <td>
+      <td className="cell-table-almoxarifado">
         {item.tipo}
       </td>
 
-      <td>
+      <td className="cell-table-almoxarifado">
         {item.usuarioId}
       </td>
 
@@ -44,11 +44,11 @@ export const LineItem = ({item, altItem, deleteItem}) => {
 
       <CellDate date={item.dataExclusao} />
 
-      <td>
+      <td className="cell-table-almoxarifado">
         <LineButton type="alt" func={alt} />
       </td>
 
-      <td>
+      <td className="cell-table-almoxarifado">
         <LineButton type="delete" func={del} />
       </td>
 

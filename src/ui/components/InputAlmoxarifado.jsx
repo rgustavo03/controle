@@ -9,7 +9,7 @@ export default function InputAlmoxarifado({type, placeholder, register}) {
       type={type} 
       placeholder={placeholder} 
       {...register} 
-      className={``} 
+      className={`border border-slate-900 rounded p-2`} 
     />
   )
 }

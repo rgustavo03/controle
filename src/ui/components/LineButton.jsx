@@ -3,18 +3,21 @@ import React from "react";
 export const LineButton = ({type, func}) => {
   
   let name = '';
-  let bgColor = '';
+  let bg = '';
+  let color = '';
 
   if(type == 'alt') {
     name = 'Alterar';
-    bgColor = 'bg-slate-300';
+    bg = 'slate-300';
+    color = 'black';
   }
   if(type == 'delete') {
     name = 'Excluir';
-    bgColor = 'bg-red-500';
+    bg = 'red-600';
+    color = 'white';
   }
 
   return (
-    <button className={`${bgColor} p-1 rounded-sm`} onClick={() => func()} >{name}</button>
+    <button className={`bg-${bg} p-2 rounded-sm text-${color}`} onClick={() => func()} >{name}</button>
   )
 }

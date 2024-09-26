@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import FormAltAlmoxarifado from "./FormAltAlmoxarifado";
 import altAlmoxarifado from "../../services/altAlmoxarifado";
 
-export default function AlterAlmoxarifado({itemAlt, altActive, token, updateListAlmoxarifados}) {
+export default function AlterAlmoxarifado({itemAlt, altActive, toggleAltActive, token, updateListAlmoxarifados}) {
 
 
   function alt(item) {
@@ -15,6 +15,6 @@ export default function AlterAlmoxarifado({itemAlt, altActive, token, updateList
 
 
   if(altActive) return (
-    <FormAltAlmoxarifado alt={alt} />
+    <FormAltAlmoxarifado itemAlt={itemAlt} alt={alt} toggleAltActive={toggleAltActive} />
   )
 }

@@ -31,6 +31,8 @@ export default function Controller() {
 
   const [list, setList] = useState([objEmpty]);
 
+  const [addActive, setAddActive] = useState(false); // toggle para div de inserção de itens
+
   const [itemAlt, setItemAlt] = useState(objEmpty); // item para alteração
 
   const [altActive, setAltActive] = useState(false); // toggle para tela de alteração (aparecer ou sumir)
@@ -48,6 +50,16 @@ export default function Controller() {
 
     navigate('/'); // deslogado, redirecionar para login
   }, []);
+
+
+
+  function toggleAddActive(boolean) {
+    setAddActive(boolean);
+  }
+
+  function toggleAltActive(boolean) {
+    setAltActive(boolean);
+  }
 
 
 
@@ -81,22 +93,26 @@ export default function Controller() {
 
   const deleteItem = (id) => {
     deleteAlmoxarifado(getToken(), id, updateListAlmoxarifados);
+    setAltActive(false);
   }
-
-
 
 
 
   if(active) return (
     <div id="content">
 
+
       <AlmoxarifadoHeader />
 
-      <AddAlmoxarifado updateListAlmoxarifados={updateListAlmoxarifados} token={getToken()} />
 
-      <TableItems list={list} altItem={altItem} deleteItem={deleteItem} />
+      <div id="middle" className="flex flex-col p-11">
+        <AddAlmoxarifado addActive={addActive} toggleAddActive={toggleAddActive} updateListAlmoxarifados={updateListAlmoxarifados} token={getToken()} />
 
-      <AlterAlmoxarifado itemAlt={itemAlt} altActive={altActive} token={getToken()} updateListAlmoxarifados={updateListAlmoxarifados} />
+        <TableItems list={list} altItem={altItem} deleteItem={deleteItem} />
+
+        <AlterAlmoxarifado itemAlt={itemAlt} altActive={altActive} toggleAltActive={toggleAltActive} token={getToken()} updateListAlmoxarifados={updateListAlmoxarifados} />
+      </div>
+
 
     </div>
   )

@@ -4,6 +4,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import SubmitButton from "../components/SubmitButton";
+import CancelButton from "../components/CancelButton";
 
 
 const userSchema = z.object({
@@ -13,7 +14,7 @@ const userSchema = z.object({
 });
 
 
-export default function FormCreateAlmoxarifado({create}) {
+export default function FormCreateAlmoxarifado({create, toggleAddActive}) {
 
 
   const { register, handleSubmit } = useForm({
@@ -27,12 +28,17 @@ export default function FormCreateAlmoxarifado({create}) {
 
 
   return (
-    <form onSubmit={handleSubmit(submitItem)}>
+    <form onSubmit={handleSubmit(submitItem)} className="flex flex-col gap-1 p-2">
+
+      <h3>Novo Almoxarifado</h3>
+
       <InputAlmoxarifado type="text" placeholder="Id Empresa" register={{...register("empresaId")}} />
       <InputAlmoxarifado type="text" placeholder="Descrição" register={{...register("descricao")}} />
       <InputAlmoxarifado type="text" placeholder="Tipo" register={{...register("tipo")}} />
 
       <SubmitButton nome="Inserir" />
+      <CancelButton toggleActive={toggleAddActive} />
+
     </form>
   )
 }

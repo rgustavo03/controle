@@ -3,20 +3,20 @@ import React from "react";
 import { LineItem } from "../components/LineItem";
 
 export const TableItems = ({list, altItem, deleteItem}) => {
+
+  const headers = ["Id", "Id da empresa", "Descrição", "Tipo", "Id do usuário", "Inclusão", "Alteração", "Exclusão", "", ""];
   //
   return (
-    <div className="border p-7">
+    <div className="flex justify-center border border-slate-900 rounded py-2 my-5">
       <table>
         <thead>
-          <tr>
-            <th>Id</th>
-            <th>Id da empresa</th>
-            <th>Descrição</th>
-            <th>Tipo</th>
-            <th>Id do usuário</th>
-            <th>Data da Inclusão</th>
-            <th>Data de Alteração</th>
-            <th>Data de Exclusão</th>
+          <tr className="border-y border-y-neutral-400">
+            {headers.map(header => {
+              //
+              return (
+                <th className="p-3 px-4" >{header}</th>
+              )
+            })}
           </tr>
         </thead>
         <tbody>

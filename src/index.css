@@ -11,3 +11,7 @@
 input {
   outline: none;
 }
+
+.cell-table-almoxarifado {
+  text-align: center;
+}
