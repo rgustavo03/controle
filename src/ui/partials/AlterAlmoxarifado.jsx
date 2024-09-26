@@ -11,6 +11,7 @@ export default function AlterAlmoxarifado({itemAlt, altActive, toggleAltActive, 
     const tipo = item.tipo;
 
     altAlmoxarifado(id, descricao, tipo, token, updateListAlmoxarifados);
+    toggleAltActive(false);
   }
 
 
