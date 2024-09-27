@@ -1,22 +1,25 @@
-import axios from "axios";
 
-export default async function deleteAlmoxarifado(token, id, updateListAlmoxarifados) {
+import axiosInterceptor from "./axiosInterceptor";
+
+export default async function deleteAlmoxarifado(token, id, updateListAlmoxarifados, navigate) {
+
+  // @ts-ignore
+  const apiURL = import.meta.env.VITE_API_ALMOXARIFADO;
+
+  const axios = axiosInterceptor(navigate);
 
   try {
     await axios.delete(
 
-      `https://compsysweb.pdvfiscal.com.br/api/v1/almoxarifado/excluir/${id}`,
+      `${apiURL}/excluir/${id}`,
       {headers: { Authorization: `Bearer ${token}` }}
 
     )
     .then(res => {
 
-      if(res.data.status == 200) {
-        updateListAlmoxarifados();
-        console.log(res.data.message);
-      }
+      if(res.data.status == 200) updateListAlmoxarifados();
 
-      else console.log("Erro");
+      else console.log("Erro ", res.data.message);
 
     });
   }

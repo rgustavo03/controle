@@ -27,7 +27,7 @@ export default function Controller() {
 
   const navigate = useNavigate();
 
-  const { checkSession, getToken } = useSession();
+  const { getToken } = useSession();
 
   const [list, setList] = useState([objEmpty]);
 
@@ -39,6 +39,7 @@ export default function Controller() {
 
 
 
+  /*
   useEffect(() => {
     const isLogged = checkSession();
 
@@ -48,25 +49,35 @@ export default function Controller() {
       return
     }
 
-    navigate('/'); // deslogado, redirecionar para login
+    redirectLogin(); // deslogado, redirecionar para login
   }, []);
+  */
+
+  useEffect(() => {
+    updateListAlmoxarifados();
+    setActive(true);
+  }, [])
+
+  function activePage(boolean) {
+    setActive(boolean);
+  }
+  
 
 
 
-  function toggleAddActive(boolean) {
+  function toggleAddActive(boolean) { // Display componente de add almoxarifado
     setAddActive(boolean);
   }
 
-  function toggleAltActive(boolean) {
+  function toggleAltActive(boolean) { // Display componente de alteração de almoxarifado
     setAltActive(boolean);
   }
 
 
 
   function updateListAlmoxarifados() {
-    // API para listar Almoxarifados (com axios)
-    getAlmoxarifados(getToken(), handleSetList); // token, funcao que altera lista de almoxarifados
-    //console.log('lista alterada', list);
+    getAlmoxarifados(getToken(), handleSetList, navigate); // requisição API para listar Almoxarifados (axios)
+    // props (token, funcao que altera lista de almoxarifados, navigate)
   }
 
 
@@ -92,7 +103,7 @@ export default function Controller() {
 
 
   const deleteItem = (id) => {
-    deleteAlmoxarifado(getToken(), id, updateListAlmoxarifados);
+    deleteAlmoxarifado(getToken(), id, updateListAlmoxarifados, navigate);
     setAltActive(false);
   }
 
@@ -106,11 +117,30 @@ export default function Controller() {
 
 
       <div id="middle" className="flex flex-col p-11">
-        <AddAlmoxarifado addActive={addActive} toggleAddActive={toggleAddActive} updateListAlmoxarifados={updateListAlmoxarifados} token={getToken()} />
 
-        <TableItems list={list} altItem={altItem} deleteItem={deleteItem} />
+        <AddAlmoxarifado 
+          addActive={addActive} 
+          toggleAddActive={toggleAddActive} 
+          updateListAlmoxarifados={updateListAlmoxarifados} 
+          token={getToken()} 
+          navigate={navigate}
+        />
 
-        <AlterAlmoxarifado itemAlt={itemAlt} altActive={altActive} toggleAltActive={toggleAltActive} token={getToken()} updateListAlmoxarifados={updateListAlmoxarifados} />
+        <TableItems 
+          list={list} 
+          altItem={altItem} 
+          deleteItem={deleteItem} 
+        />
+
+        <AlterAlmoxarifado 
+          itemAlt={itemAlt} 
+          altActive={altActive} 
+          toggleAltActive={toggleAltActive} 
+          token={getToken()} 
+          updateListAlmoxarifados={updateListAlmoxarifados} 
+          navigate={navigate} 
+        />
+
       </div>
 
 

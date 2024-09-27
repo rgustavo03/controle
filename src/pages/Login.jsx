@@ -1,27 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../ui/partials/LoginForm";
-import axios from "axios";
+//import axios from "axios";
 import useSession from "../hooks/useSession";
+import axiosInterceptor from "../services/axiosInterceptor";
 
 export default function Login() {
 
-  const [active, setActive] = useState(false); // pagina ativa ou não
+  // @ts-ignore
+  const loginApiURL = import.meta.env.VITE_API_LOGIN;
 
   const navigate = useNavigate(); // redirecionar páginas
+  const axios = axiosInterceptor();
 
-  const { startSession, checkSession } = useSession(); // funções de sessão do usuário
+  const { startSession, endSession } = useSession(); // funções de sessão do usuário
 
 
   useEffect(() => {
-    const isLogged = checkSession();
-
-    if(!isLogged) {
-      setActive(true);
-      return
-    }
-
-    navigate('/controle'); // redirecionar para página controle
+    endSession();
   }, []);
 
 
@@ -46,13 +42,13 @@ export default function Login() {
     try {
       await axios.post(
 
-        'https://compsysweb.pdvfiscal.com.br/api/v1/login-empresas',
+        `${loginApiURL}`,
         { empresaId: user.empresaId, login: user.login, senha: user.senha }
 
       )
       .then(res => {
 
-        if(res.data.status == 200) connection(res.data); // sucesso conexão
+        if(res.data.status == 200) connection(res.data.data.token); // sucesso conexão
         else invalid(res.data.message); // erro conexão
 
       });
@@ -68,22 +64,15 @@ export default function Login() {
   }
 
 
-  const connection = (data) => {
-    //console.log(data.data.usuario);
-    //console.log(data.data.perfilUsuario);
-    //console.log(data.data.loja); // dados empresa
-
-    const token = data.data.token;
-    const expiration = data.data.expiration;
-
-    startSession(token, expiration);
+  const connection = (token) => {
+    startSession(token);
 
     navigate('/controle'); // redirecionar para página controle
   }
 
 
 
-  if(active) return (
+  return (
     <div id="page-login" className="flex flex-row h-screen">
 
       <section id="login-section" className="p-20 flex justify-center">

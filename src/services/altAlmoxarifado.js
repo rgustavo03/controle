@@ -1,10 +1,15 @@
-import axios from "axios";
+import axiosInterceptor from "./axiosInterceptor";
 
-export default async function altAlmoxarifado(id, descricao, tipo, token, updateListAlmoxarifados) {
+export default async function altAlmoxarifado(id, descricao, tipo, token, updateListAlmoxarifados, navigate) {
+
+  // @ts-ignore
+  const apiURL = import.meta.env.VITE_API_ALMOXARIFADO;
+
+  const axios = axiosInterceptor(navigate);
 
   try {
     await axios.put(
-      'https://compsysweb.pdvfiscal.com.br/api/v1/almoxarifado/alterar',
+      `${apiURL}/alterar`,
       {
         id: id,
         descricao: descricao,
@@ -15,7 +20,13 @@ export default async function altAlmoxarifado(id, descricao, tipo, token, update
     .then(res => {
 
       console.log(res.data.message);
+
       updateListAlmoxarifados();
+
+    })
+    .catch(error => {
+
+      console.log(error);
 
     })
   }

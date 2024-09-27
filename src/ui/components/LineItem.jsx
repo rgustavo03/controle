@@ -46,9 +46,6 @@ export const LineItem = ({item, altItem, deleteItem}) => {
 
       <td className="cell-table-almoxarifado">
         <LineButton type="alt" func={alt} />
-      </td>
-
-      <td className="cell-table-almoxarifado">
         <LineButton type="delete" func={del} />
       </td>
 

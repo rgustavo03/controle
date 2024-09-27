@@ -1,10 +1,17 @@
-import axios from "axios";
+import axiosInterceptor from "./axiosInterceptor";
 
-export default async function createAlmoxarifado(data, token, updateListAlmoxarifados) {
+
+export default async function createAlmoxarifado(data, token, updateListAlmoxarifados, navigate) {
+
+  // @ts-ignore
+  const apiURL = import.meta.env.VITE_API_ALMOXARIFADO;
+
+  const axios = axiosInterceptor(navigate);
+
   try {
     await axios.post(
 
-      'https://compsysweb.pdvfiscal.com.br/api/v1/almoxarifado/criar',
+      `${apiURL}/criar`,
       {
         empresaId: data.empresaId, 
         descricao: data.descricao, 
@@ -16,6 +23,7 @@ export default async function createAlmoxarifado(data, token, updateListAlmoxari
     .then(res => {
 
       console.log(res.data.message);
+
       updateListAlmoxarifados();
 
     });

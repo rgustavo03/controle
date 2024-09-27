@@ -4,17 +4,17 @@ import { LineItem } from "../components/LineItem";
 
 export const TableItems = ({list, altItem, deleteItem}) => {
 
-  const headers = ["Id", "Id da empresa", "Descrição", "Tipo", "Id do usuário", "Inclusão", "Alteração", "Exclusão", "", ""];
+  const headers = ["Id", "Id da empresa", "Descrição", "Tipo", "Id do usuário", "Inclusão", "Alteração", "Exclusão", ""];
   //
   return (
-    <div className="flex justify-center border border-slate-900 rounded py-2 my-5">
+    <div className="flex justify-center border border-slate-900 rounded my-5">
       <table>
         <thead>
-          <tr className="border-y border-y-neutral-400">
+          <tr className="border-y border-b-neutral-400">
             {headers.map(header => {
               //
               return (
-                <th className="p-3 px-4" >{header}</th>
+                <th key={header} className="p-3 px-4" >{header}</th>
               )
             })}
           </tr>

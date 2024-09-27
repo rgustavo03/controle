@@ -31,11 +31,23 @@ export default function LoginForm({login}) {
 
       <h2 className="text-2xl my-2">Login</h2>
 
-      <InputLogin type="text" placeholder="Id da empresa" register={{...register("empresaId", { required: true })}} />
+      <InputLogin 
+        type="text" 
+        placeholder="Id da empresa" 
+        register={{...register("empresaId")}} 
+      />
 
-      <InputLogin type="text" placeholder="Email" register={{...register("login", { required: true })}} />
+      <InputLogin 
+        type="text" 
+        placeholder="Email" 
+        register={{...register("login")}} 
+      />
 
-      <InputLogin type="password" placeholder="Senha" register={{...register("senha", { required: true })}} />
+      <InputLogin 
+        type="password" 
+        placeholder="Senha" 
+        register={{...register("senha")}} 
+      />
 
       <LoginButton nome="Entrar" />
 

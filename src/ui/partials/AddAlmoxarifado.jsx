@@ -3,10 +3,10 @@ import FormCreateAlmoxarifado from "./FormCreateAlmoxarifado";
 import createAlmoxarifado from "../../services/createAlmoxarifado";
 import AddActiveButton from "../components/AddActiveButton";
 
-export default function AddAlmoxarifado({addActive, toggleAddActive, updateListAlmoxarifados, token}) {
+export default function AddAlmoxarifado({addActive, toggleAddActive, updateListAlmoxarifados, token, navigate}) {
 
   function create(data) {
-    createAlmoxarifado(data, token, updateListAlmoxarifados);
+    createAlmoxarifado(data, token, updateListAlmoxarifados, navigate);
     toggleAddActive(false);
   }
 

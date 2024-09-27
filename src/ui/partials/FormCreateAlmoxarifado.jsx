@@ -8,9 +8,9 @@ import CancelButton from "../components/CancelButton";
 
 
 const userSchema = z.object({
-  empresaId: z.coerce.number(),
-  descricao: z.string(),
-  tipo: z.coerce.number()
+  empresaId: z.coerce.number().min(1),
+  descricao: z.string().min(1),
+  tipo: z.coerce.number().min(1)
 });
 
 
@@ -32,9 +32,23 @@ export default function FormCreateAlmoxarifado({create, toggleAddActive}) {
 
       <h3>Novo Almoxarifado</h3>
 
-      <InputAlmoxarifado type="text" placeholder="Id Empresa" register={{...register("empresaId")}} />
-      <InputAlmoxarifado type="text" placeholder="Descrição" register={{...register("descricao")}} />
-      <InputAlmoxarifado type="text" placeholder="Tipo" register={{...register("tipo")}} />
+      <InputAlmoxarifado 
+        type="text" 
+        placeholder="Id Empresa" 
+        register={{...register("empresaId")}} 
+      />
+
+      <InputAlmoxarifado 
+        type="text" 
+        placeholder="Descrição" 
+        register={{...register("descricao")}} 
+      />
+      
+      <InputAlmoxarifado 
+        type="text" 
+        placeholder="Tipo" 
+        register={{...register("tipo")}} 
+      />
 
       <SubmitButton nome="Inserir" />
       <CancelButton toggleActive={toggleAddActive} />
