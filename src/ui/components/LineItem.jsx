@@ -1,6 +1,8 @@
 import React from "react";
 import { LineButton } from "./LineButton";
 import { CellDate } from "./CellDate";
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
+import { Ellipsis } from "./Ellipsis";
 
 export const LineItem = ({item, altItem, deleteItem}) => {
 
@@ -16,7 +18,7 @@ export const LineItem = ({item, altItem, deleteItem}) => {
 
 
   return (
-    <tr className="border-y border-y-neutral-200">
+    <tr className="border-b border-neutral-200">
 
       <td className="cell-table-almoxarifado">
         {item.id}
@@ -45,8 +47,20 @@ export const LineItem = ({item, altItem, deleteItem}) => {
       <CellDate date={item.dataExclusao} />
 
       <td className="cell-table-almoxarifado">
-        <LineButton type="alt" func={alt} />
-        <LineButton type="delete" func={del} />
+        <Menu>
+          <MenuButton className="flex justify-center items-center">
+            <Ellipsis size="7" color="black" />
+          </MenuButton>
+
+          <MenuItems anchor="bottom" className="flex flex-col">
+            <MenuItem>
+              <LineButton type="alt" func={alt} />
+            </MenuItem>
+            <MenuItem>
+              <LineButton type="delete" func={del} />
+            </MenuItem>
+          </MenuItems>
+        </Menu>
       </td>
 
     </tr>

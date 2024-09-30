@@ -8,12 +8,13 @@ export default function useSession() {
 
 
 
-  const startSession = (token) => {
+  const startSession = (data) => {
     const session = {
-      token: token
+      token: data.token,
+      name: data.usuario.nome
     };
 
-    window.localStorage.setItem(key, JSON.stringify(session));
+    setStorage(session);
   }
 
 
@@ -24,23 +25,10 @@ export default function useSession() {
   }
 
 
-  /* REFAZER MÉTODO???
-  // Pode ser usado para verificar autenticação com a api, mas acho que não é necessário, pois no
-  // método de listar almoxarifados já faz essa verificação de autenticação, daí retorna para login.
-  //
-  const checkSession = () => {
-    const expDate = new Date(user.expiration);
-
-    const actualDate = new Date();
-
-    if(expDate > actualDate) return true // dentro do tempo limite de login
-
-    // tempo de login excedido
-    setStorage({}); // usuario no Storage vazio
-    setUser({}); // usuario vazio
-    return false
+  
+  const getName = () => {
+    return user.name
   }
-  */
 
 
 
@@ -56,5 +44,5 @@ export default function useSession() {
 
 
 
-  return { startSession, endSession, getToken }
+  return { startSession, endSession, getName, getToken }
 }

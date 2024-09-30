@@ -5,7 +5,7 @@ export default function CancelButton({toggleActive}) {
   return (
     <button 
       onClick={() => toggleActive(false)}
-      className="bg-red-600 rounded text-white p-2"
+      className="border rounded text-black p-2 px-4"
     >
       Cancelar
     </button>

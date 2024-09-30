@@ -7,7 +7,7 @@ export default function SubmitButton({nome}) {
   return (
     <button 
       type="submit" 
-      className="bg-slate-900 text-white rounded p-2"
+      className="bg-slate-900 text-white rounded p-2 px-4"
     >
       {nome}
     </button>

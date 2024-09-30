@@ -48,7 +48,7 @@ export default function Login() {
       )
       .then(res => {
 
-        if(res.data.status == 200) connection(res.data.data.token); // sucesso conexão
+        if(res.data.status == 200) connection(res.data.data); // sucesso conexão
         else invalid(res.data.message); // erro conexão
 
       });
@@ -64,8 +64,8 @@ export default function Login() {
   }
 
 
-  const connection = (token) => {
-    startSession(token);
+  const connection = (data) => {
+    startSession(data);
 
     navigate('/controle'); // redirecionar para página controle
   }

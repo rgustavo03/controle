@@ -4,30 +4,30 @@ import { LineItem } from "../components/LineItem";
 
 export const TableItems = ({list, altItem, deleteItem}) => {
 
+
   const headers = ["Id", "Id da empresa", "Descrição", "Tipo", "Id do usuário", "Inclusão", "Alteração", "Exclusão", ""];
-  //
+
+
   return (
-    <div className="flex justify-center border border-slate-900 rounded my-5">
-      <table>
-        <thead>
-          <tr className="border-y border-b-neutral-400">
-            {headers.map(header => {
-              //
-              return (
-                <th key={header} className="p-3 px-4" >{header}</th>
-              )
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          {list.map(item => {
+    <table>
+      <thead>
+        <tr className="">
+          {headers.map(header => {
+            //
             return (
-              <LineItem key={item.id} item={item} altItem={altItem} deleteItem={deleteItem} />
+              <th key={header} className="text-base font-semibold text-gray-900 p-3 px-4" >{header}</th>
             )
           })}
-        </tbody>
-      </table>
-    </div>
+        </tr>
+      </thead>
+      <tbody>
+        {list.map(item => {
+          return (
+            <LineItem key={item.id} item={item} altItem={altItem} deleteItem={deleteItem} />
+          )
+        })}
+      </tbody>
+    </table>
   )
 }
 

@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import SubmitButton from "../components/SubmitButton";
 import CancelButton from "../components/CancelButton";
+import { Close } from "../components/Close";
 
 
 const userSchema = z.object({
@@ -28,30 +29,31 @@ export default function FormCreateAlmoxarifado({create, toggleAddActive}) {
 
 
   return (
-    <form onSubmit={handleSubmit(submitItem)} className="flex flex-col gap-1 p-2">
+    <form onSubmit={handleSubmit(submitItem)} className="w-full flex flex-col justify-between">
 
-      <h3>Novo Almoxarifado</h3>
+      <div id="add-top" className="flex flex-col px-6">
 
-      <InputAlmoxarifado 
-        type="text" 
-        placeholder="Id Empresa" 
-        register={{...register("empresaId")}} 
-      />
+        <div className="h-[70px] flex flex-row justify-between items-center">
+          <h3 className="text-base font-semibold">Novo Almoxarifado</h3>
 
-      <InputAlmoxarifado 
-        type="text" 
-        placeholder="Descrição" 
-        register={{...register("descricao")}} 
-      />
-      
-      <InputAlmoxarifado 
-        type="text" 
-        placeholder="Tipo" 
-        register={{...register("tipo")}} 
-      />
+          <div className="cursor-pointer" onClick={() => toggleAddActive(false)}>
+            <Close size="6" color="black" />
+          </div>
+        </div>
 
-      <SubmitButton nome="Inserir" />
-      <CancelButton toggleActive={toggleAddActive} />
+        <div className="flex flex-col gap-2">
+          <InputAlmoxarifado type="text" placeholder="Id Empresa" register={{...register("empresaId")}} />
+          <InputAlmoxarifado type="text" placeholder="Descrição"  register={{...register("descricao")}} />
+          <InputAlmoxarifado type="text" placeholder="Tipo"       register={{...register("tipo")}}      />
+        </div>
+
+      </div>
+
+
+      <div id="add-bottom" className="h-[70px] border-t flex flex-row justify-end items-center gap-3 pr-6">
+        <CancelButton toggleActive={toggleAddActive} />
+        <SubmitButton nome="Criar" />
+      </div>
 
     </form>
   )

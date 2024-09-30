@@ -6,7 +6,8 @@ import getAlmoxarifados from "../services/getAlmoxarifados";
 import deleteAlmoxarifado from "../services/deleteAlmoxarifado";
 import AddAlmoxarifado from "../ui/partials/AddAlmoxarifado";
 import AlterAlmoxarifado from "../ui/partials/AlterAlmoxarifado";
-import AlmoxarifadoHeader from "../ui/partials/AlmoxarifadoHeader";
+import Header from "../ui/partials/Header";
+import AddActiveButton from "../ui/components/AddActiveButton";
 
 
 const objEmpty = {
@@ -27,7 +28,7 @@ export default function Controller() {
 
   const navigate = useNavigate();
 
-  const { getToken } = useSession();
+  const { getName, getToken } = useSession();
 
   const [list, setList] = useState([objEmpty]);
 
@@ -55,12 +56,7 @@ export default function Controller() {
 
   useEffect(() => {
     updateListAlmoxarifados();
-    setActive(true);
-  }, [])
-
-  function activePage(boolean) {
-    setActive(boolean);
-  }
+  }, []);
   
 
 
@@ -84,6 +80,7 @@ export default function Controller() {
 
   function handleSetList(data) {
     setList(data);
+    setActive(true);
   }
 
 
@@ -110,39 +107,67 @@ export default function Controller() {
 
 
   if(active) return (
-    <div id="content">
+    <div id="page" className="min-h-screen bg-gray-200">
 
 
-      <AlmoxarifadoHeader />
+      <Header name={getName()} />
 
 
-      <div id="middle" className="flex flex-col p-11">
+      <AddAlmoxarifado 
+        addActive={addActive} 
+        toggleAddActive={toggleAddActive} 
+        updateListAlmoxarifados={updateListAlmoxarifados} 
+        token={getToken()} 
+        navigate={navigate}
+      />
 
-        <AddAlmoxarifado 
-          addActive={addActive} 
-          toggleAddActive={toggleAddActive} 
-          updateListAlmoxarifados={updateListAlmoxarifados} 
-          token={getToken()} 
-          navigate={navigate}
-        />
 
-        <TableItems 
-          list={list} 
-          altItem={altItem} 
-          deleteItem={deleteItem} 
-        />
+      <div id="content" className="flex flex-col p-10">
 
-        <AlterAlmoxarifado 
-          itemAlt={itemAlt} 
-          altActive={altActive} 
-          toggleAltActive={toggleAltActive} 
-          token={getToken()} 
-          updateListAlmoxarifados={updateListAlmoxarifados} 
-          navigate={navigate} 
-        />
+
+        <div id="middle" className="flex flex-col border rounded-lg bg-white pb-5">
+          <div id="middle-top" className="h-[70px] flex flex-row justify-between items-center p-6 border-b border-gray-200">
+            <h3 className="text-lg text-gray-700 font-semibold">Almoxarifados</h3>
+            <AddActiveButton toggleAddActive={toggleAddActive} />
+          </div>
+
+          <TableItems 
+            list={list} 
+            altItem={altItem} 
+            deleteItem={deleteItem} 
+          />
+        </div>
+
 
       </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <AlterAlmoxarifado 
+        itemAlt={itemAlt} 
+        altActive={altActive} 
+        toggleAltActive={toggleAltActive} 
+        token={getToken()} 
+        updateListAlmoxarifados={updateListAlmoxarifados} 
+        navigate={navigate} 
+      />
 
     </div>
   )

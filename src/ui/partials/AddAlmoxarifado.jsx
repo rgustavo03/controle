@@ -1,7 +1,6 @@
 import React from "react";
 import FormCreateAlmoxarifado from "./FormCreateAlmoxarifado";
 import createAlmoxarifado from "../../services/createAlmoxarifado";
-import AddActiveButton from "../components/AddActiveButton";
 
 export default function AddAlmoxarifado({addActive, toggleAddActive, updateListAlmoxarifados, token, navigate}) {
 
@@ -11,17 +10,9 @@ export default function AddAlmoxarifado({addActive, toggleAddActive, updateListA
   }
 
 
-  
-
-
-
-  return (
-    <div id="create-almoxarifado" className="flex justify-start">
-      {addActive? (
-        <FormCreateAlmoxarifado create={create} toggleAddActive={toggleAddActive} />
-      ) : (
-        <AddActiveButton toggleAddActive={toggleAddActive} />
-      )}
+  if(addActive) return (
+    <div id="create-almoxarifado" className="bg-white absolute z-10 top-0 right-0 h-screen w-[440px] flex justify-end">
+      <FormCreateAlmoxarifado create={create} toggleAddActive={toggleAddActive} />
     </div>
   )
 }
