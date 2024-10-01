@@ -113,17 +113,7 @@ export default function Controller() {
       <Header name={getName()} />
 
 
-      <AddAlmoxarifado 
-        addActive={addActive} 
-        toggleAddActive={toggleAddActive} 
-        updateListAlmoxarifados={updateListAlmoxarifados} 
-        token={getToken()} 
-        navigate={navigate}
-      />
-
-
       <div id="content" className="flex flex-col p-10">
-
 
         <div id="middle" className="flex flex-col border rounded-lg bg-white pb-5">
           <div id="middle-top" className="h-[70px] flex flex-row justify-between items-center p-6 border-b border-gray-200">
@@ -138,26 +128,16 @@ export default function Controller() {
           />
         </div>
 
-
       </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      <AddAlmoxarifado 
+        addActive={addActive} 
+        toggleAddActive={toggleAddActive} 
+        updateListAlmoxarifados={updateListAlmoxarifados} 
+        token={getToken()} 
+        navigate={navigate}
+      />
 
 
       <AlterAlmoxarifado 
@@ -168,6 +148,7 @@ export default function Controller() {
         updateListAlmoxarifados={updateListAlmoxarifados} 
         navigate={navigate} 
       />
+
 
     </div>
   )

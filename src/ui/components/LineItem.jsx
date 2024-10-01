@@ -1,19 +1,17 @@
 import React from "react";
-import { LineButton } from "./LineButton";
 import { CellDate } from "./CellDate";
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { Ellipsis } from "./Ellipsis";
+import { CellOptions } from "./CellOptions";
 
 export const LineItem = ({item, altItem, deleteItem}) => {
 
 
-  function del() {
-    deleteItem(item.id);
+  function alt() {
+    altItem(item.id);
   }
 
 
-  function alt() {
-    altItem(item.id);
+  function del() {
+    deleteItem(item.id);
   }
 
 
@@ -46,21 +44,8 @@ export const LineItem = ({item, altItem, deleteItem}) => {
 
       <CellDate date={item.dataExclusao} />
 
-      <td className="cell-table-almoxarifado">
-        <Menu>
-          <MenuButton className="flex justify-center items-center">
-            <Ellipsis size="7" color="black" />
-          </MenuButton>
-
-          <MenuItems anchor="bottom" className="flex flex-col">
-            <MenuItem>
-              <LineButton type="alt" func={alt} />
-            </MenuItem>
-            <MenuItem>
-              <LineButton type="delete" func={del} />
-            </MenuItem>
-          </MenuItems>
-        </Menu>
+      <td className="cell-table-almoxarifado relative">
+        <CellOptions alt={alt} del={del} />
       </td>
 
     </tr>

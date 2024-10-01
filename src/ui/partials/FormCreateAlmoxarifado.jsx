@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import SubmitButton from "../components/SubmitButton";
 import CancelButton from "../components/CancelButton";
-import { Close } from "../components/Close";
+import { Close } from "../svg/Close";
 
 
 const userSchema = z.object({
@@ -37,7 +37,7 @@ export default function FormCreateAlmoxarifado({create, toggleAddActive}) {
           <h3 className="text-base font-semibold">Novo Almoxarifado</h3>
 
           <div className="cursor-pointer" onClick={() => toggleAddActive(false)}>
-            <Close size="6" color="black" />
+            <Close size="7" color="black" />
           </div>
         </div>
 

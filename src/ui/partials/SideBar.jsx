@@ -1,38 +1,63 @@
-import React from "react";
-import { Close } from "../components/Close";
+import React from 'react';
+import { Dialog, DialogBackdrop, DialogPanel, DialogTitle, TransitionChild } from '@headlessui/react'
+import { XMarkIcon } from '@heroicons/react/24/outline'
 import { LinkSideBar } from "../components/LinkSideBar";
-import { Logo } from "../components/Logo";
 
-// SideBar é posicionada a partir de Header
 
-export default function SideBar({active, handleActive}) {
+export const SideBar = ({open, close}) => {
+
 
   function closeSideBar() {
-    handleActive(false);
+    close();
   }
 
-  if(active) return (
-    <div className="bg-[rgba(0,0,0,0.4)] absolute z-10 h-screen w-screen left-0 top-0 transition-all flex justify-start items-start">
 
-      <div className="bg-gray-800 h-full w-96 flex flex-col px-2">
-        <div className="h-[70px] flex justify-start items-center p-2">
-          <Logo size="8" />
+  return (
+    <Dialog open={open} onClose={closeSideBar} className="relative z-10">
+
+      <DialogBackdrop transition className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity duration-500 ease-in-out data-[closed]:opacity-0" />
+
+      <div className="fixed inset-0 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden">
+
+
+          <div className="h-full fixed left-0 flex max-w-full">
+            <DialogPanel transition className="pointer-events-auto relative w-screen max-w-md transform transition duration-500 ease-in-out data-[closed]:-translate-x-full sm:duration-700">
+              
+              {/* Conteudo SideBar */}
+              <div className="h-full flex flex-col bg-gray-800">
+                <div className="h-[70px] bg-slate-900 px-4 flex items-center">
+                  <DialogTitle className="text-base font-semibold leading-6 text-white">Panel title</DialogTitle>
+                </div>
+
+                <div className="relative mt-4 flex-1 flex flex-col px-2">
+                  <LinkSideBar link="/comandas" text="Comandas" />
+                  <LinkSideBar link="/zona-atendimento" text="Zona Atendimento" />
+                  <LinkSideBar link="/local-atendimento" text="Local Atentidmento" />
+                  <LinkSideBar link="/forma-pagamento" text="Forma Pagamento" />
+                  <LinkSideBar link="/usuarios" text="Usuarios" />
+                  <LinkSideBar link="/perfil-acesso" text="Perfil Acesso" />
+                </div>
+              </div>
+
+              {/* Btn fechar */}
+              <TransitionChild>
+                <div className="absolute right-[-55px] top-0 flex h-[70px] duration-500 ease-in-out data-[closed]:opacity-0 sm:-ml-10 sm:pr-4">
+                  <button type="button" onClick={() => closeSideBar()} className="relative rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white">
+                    <span className="absolute -inset-2.5" />
+                    <span className="sr-only">Close panel</span>
+                    <XMarkIcon aria-hidden="true" className="h-6 w-6" />
+                  </button>
+                </div>
+              </TransitionChild>
+            </DialogPanel>
+
+          </div>
+
+
         </div>
-
-        <LinkSideBar link="/comandas" text="Comandas" />
-        <LinkSideBar link="/zona-atendimento" text="Zona Atendimento" />
-        <LinkSideBar link="/local-atendimento" text="Local Atentidmento" />
-        <LinkSideBar link="/forma-pagamento" text="Forma Pagamento" />
-        <LinkSideBar link="/usuarios" text="Usuarios" />
-        <LinkSideBar link="/perfil-acesso" text="Perfil Acesso" />
       </div>
 
-      <div className="bg=[rgba(25,25,25,0.7)] flex-1 h-full" onClick={() => closeSideBar()}>
-        <div className="h-[70px] w-[70px] flex justify-center items-center cursor-pointer">
-          <Close size="8" color="white" />
-        </div>
-      </div>
-
-    </div>
+    </Dialog>
   )
 }

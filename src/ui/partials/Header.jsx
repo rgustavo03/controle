@@ -1,16 +1,18 @@
 import React, { useState } from "react";
-import SideBar from "./SideBar";
-import { Bars } from "../components/Bars";
-import { User } from "../components/User";
+import { Bars } from "../svg/Bars";
+import { User } from "../svg/User";
+import { SideBar } from "./SideBar";
 
 export default function Header({name}) {
 
-  const [sideBarActive, setSideBarActive] = useState(false);
 
-  function handleActive(boolean) {
-    setSideBarActive(boolean); // valor contrário
-    //setSideBarActive(!sideBarActive); // valor contrário
+  const [openSideBar, setOpenSideBar] = useState(false);
+
+
+  function closeSideBar() {
+    setOpenSideBar(false);
   }
+
 
   function nameUpdt() {
     const lowered = name.toLowerCase();
@@ -20,16 +22,18 @@ export default function Header({name}) {
     return capital + rest
   }
 
+
+
   return (
     <header className="relative bg-white flex h-[70px] justify-between">
 
 
-      <SideBar active={sideBarActive} handleActive={handleActive} />
+      <SideBar open={openSideBar} close={closeSideBar} />
 
 
       <div
         className="w-[70px] flex justify-center items-center cursor-pointer"
-        onClick={() => handleActive(true)}
+        onClick={() => setOpenSideBar(true)}
       >
         <Bars />
       </div>
