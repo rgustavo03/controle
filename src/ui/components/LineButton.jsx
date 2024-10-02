@@ -1,4 +1,4 @@
-import { PencilIcon, TrashIcon } from "@heroicons/react/16/solid";
+import { PencilIcon, TrashIcon, LockClosedIcon } from "@heroicons/react/16/solid";
 import React from "react";
 
 export const LineButton = ({type, func}) => {
@@ -10,12 +10,17 @@ export const LineButton = ({type, func}) => {
   if(type == 'alt') {
     icon = <PencilIcon className="text-gray-600 size-5" />
     name = 'Alterar';
-    hover = 'hover:bg-slate-200';
+    hover = 'hover:bg-slate-100';
   }
   if(type == 'del') {
     icon = <TrashIcon  className="text-red-600 size-5" />;
     name = 'Excluir';
-    hover = 'hover:bg-red-200';
+    hover = 'hover:bg-red-100';
+  }
+  if(type == 'logout') {
+    icon = <LockClosedIcon  className="text-gray-600 size-5" />;
+    name = 'Sair';
+    hover = 'hover:bg-slate-100';
   }
 
   return (

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Bars } from "../svg/Bars";
 import { User } from "../svg/User";
 import { SideBar } from "./SideBar";
+import { UserMenu } from "../components/header/UserMenu";
 
 export default function Header({name}) {
 
@@ -46,7 +47,7 @@ export default function Header({name}) {
         </h2>
 
         <div className="w-[70px] flex justify-center items-center cursor-pointer">
-          <User />
+          <UserMenu />
         </div>
 
       </div>

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useSession from "../hooks/useSession";
-import { TableItems } from "../ui/partials/TableItems";
 import getAlmoxarifados from "../services/getAlmoxarifados";
 import deleteAlmoxarifado from "../services/deleteAlmoxarifado";
-import AddAlmoxarifado from "../ui/partials/AddAlmoxarifado";
-import AlterAlmoxarifado from "../ui/partials/AlterAlmoxarifado";
+import AddAlmoxarifado from "../ui/partials/almoxarifado/AddAlmoxarifado";
+import AlterAlmoxarifado from "../ui/partials/almoxarifado/AlterAlmoxarifado";
 import Header from "../ui/partials/Header";
 import AddActiveButton from "../ui/components/AddActiveButton";
+import { TableAlmoxarifado } from "../ui/partials/Almoxarifado/TableAlmoxarifado";
+import { ConfirmDelete } from "../ui/partials/almoxarifado/ConfirmDelete";
 
 
 const objEmpty = {
@@ -32,42 +33,51 @@ export default function Controller() {
 
   const [list, setList] = useState([objEmpty]);
 
-  const [addActive, setAddActive] = useState(false); // toggle para div de inserção de itens
+  
+  // ================
 
-  const [itemAlt, setItemAlt] = useState(objEmpty); // item para alteração
-
-  const [altActive, setAltActive] = useState(false); // toggle para tela de alteração (aparecer ou sumir)
-
-
-
-  /*
-  useEffect(() => {
-    const isLogged = checkSession();
-
-    if(isLogged) {
-      setActive(true); // página ativa
-      updateListAlmoxarifados(); 
-      return
-    }
-
-    redirectLogin(); // deslogado, redirecionar para login
-  }, []);
-  */
 
   useEffect(() => {
     updateListAlmoxarifados();
   }, []);
   
 
+  // ================
 
 
-  function toggleAddActive(boolean) { // Display componente de add almoxarifado
-    setAddActive(boolean);
+  const [addOpen, setAddOpen] = useState(false); // toggle para div de inserção de itens
+
+  function toggleAddOpen(boolean) { // Display componente de add almoxarifado
+    setAddOpen(boolean);
+  }
+  
+
+  // ================
+
+
+  const [altOpen, setAltOpen] = useState(false); // toggle para tela de alteração (aparecer ou sumir)
+
+  const [itemAlt, setItemAlt] = useState(objEmpty); // item para alteração
+
+  function toggleAltOpen(boolean) { // Display componente de alteração de almoxarifado
+    setAltOpen(boolean);
   }
 
-  function toggleAltActive(boolean) { // Display componente de alteração de almoxarifado
-    setAltActive(boolean);
+
+  // ================
+
+
+  const [delOpen, setDelOpen] = useState(false);
+
+  const [itemDel, setItemDel] = useState(objEmpty);
+
+  function toggleDelOpen(boolean) {
+    setDelOpen(boolean);
   }
+
+
+  // ================
+
 
 
 
@@ -94,14 +104,22 @@ export default function Controller() {
     }
     
     setItemAlt(item);
-    setAltActive(true);
+    setAltOpen(true);
   }
 
 
 
   const deleteItem = (id) => {
-    deleteAlmoxarifado(getToken(), id, updateListAlmoxarifados, navigate);
-    setAltActive(false);
+    //deleteAlmoxarifado(getToken(), id, updateListAlmoxarifados, navigate);
+    const item = list.find(i => i.id == id); // encontrar item para alterá-lo
+
+    if(!item) {
+      console.log('Erro ao encontrar item');
+      return
+    }
+
+    setItemDel(item);
+    setAltOpen(false);
   }
 
 
@@ -118,10 +136,10 @@ export default function Controller() {
         <div id="middle" className="flex flex-col border rounded-lg bg-white pb-5">
           <div id="middle-top" className="h-[70px] flex flex-row justify-between items-center p-6 border-b border-gray-200">
             <h3 className="text-lg text-gray-700 font-semibold">Almoxarifados</h3>
-            <AddActiveButton toggleAddActive={toggleAddActive} />
+            <AddActiveButton toggleAddOpen={toggleAddOpen} />
           </div>
 
-          <TableItems 
+          <TableAlmoxarifado 
             list={list} 
             altItem={altItem} 
             deleteItem={deleteItem} 
@@ -132,21 +150,28 @@ export default function Controller() {
 
 
       <AddAlmoxarifado 
-        addActive={addActive} 
-        toggleAddActive={toggleAddActive} 
+        addOpen={addOpen} 
+        toggleAddOpen={toggleAddOpen} 
         updateListAlmoxarifados={updateListAlmoxarifados} 
         token={getToken()} 
-        navigate={navigate}
+        navigate={navigate} 
       />
 
 
       <AlterAlmoxarifado 
         itemAlt={itemAlt} 
-        altActive={altActive} 
-        toggleAltActive={toggleAltActive} 
+        altOpen={altOpen} 
+        toggleAltOpen={toggleAltOpen} 
         token={getToken()} 
         updateListAlmoxarifados={updateListAlmoxarifados} 
         navigate={navigate} 
+      />
+
+
+      <ConfirmDelete 
+        open={delOpen} 
+        itemDel={itemDel}
+        toggle={toggleDelOpen}     
       />
 
 

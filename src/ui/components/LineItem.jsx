@@ -1,5 +1,4 @@
 import React from "react";
-import { CellDate } from "./CellDate";
 import { CellOptions } from "./CellOptions";
 
 export const LineItem = ({item, altItem, deleteItem}) => {
@@ -23,10 +22,6 @@ export const LineItem = ({item, altItem, deleteItem}) => {
       </td>
 
       <td className="cell-table-almoxarifado">
-        {item.empresaId}
-      </td>
-
-      <td className="cell-table-almoxarifado">
         {item.descricao}
       </td>
 
@@ -34,17 +29,7 @@ export const LineItem = ({item, altItem, deleteItem}) => {
         {item.tipo}
       </td>
 
-      <td className="cell-table-almoxarifado">
-        {item.usuarioId}
-      </td>
-
-      <CellDate date={item.dataInclusao} />
-
-      <CellDate date={item.dataAlteracao} />
-
-      <CellDate date={item.dataExclusao} />
-
-      <td className="cell-table-almoxarifado relative">
+      <td className="cell-table-almoxarifado relative w-[70px]">
         <CellOptions alt={alt} del={del} />
       </td>
 

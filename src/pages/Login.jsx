@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginForm from "../ui/partials/LoginForm";
+import LoginForm from "../ui/partials/login/LoginForm";
 //import axios from "axios";
 import useSession from "../hooks/useSession";
 import axiosInterceptor from "../services/axiosInterceptor";

@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { LineItem } from "../components/LineItem";
+import { LineItem } from "../../components/LineItem";
 
-export const TableItems = ({list, altItem, deleteItem}) => {
+export const TableAlmoxarifado = ({list, altItem, deleteItem}) => {
 
 
-  const headers = ["Id", "Id da empresa", "Descrição", "Tipo", "Id do usuário", "Inclusão", "Alteração", "Exclusão", ""];
+  const headers = ["Id", "Descrição", "Tipo", ""];
 
 
   return (

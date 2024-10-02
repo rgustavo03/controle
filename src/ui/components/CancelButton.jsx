@@ -1,10 +1,10 @@
 import React from "react";
 
-export default function CancelButton({toggleActive}) {
+export default function CancelButton({toggleOpen}) {
   //
   return (
     <button 
-      onClick={() => toggleActive(false)}
+      onClick={() => toggleOpen(false)}
       className="border rounded text-black p-2 px-4"
     >
       Cancelar

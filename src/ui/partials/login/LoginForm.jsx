@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import InputLogin from "../components/InputLogin";
-import LoginButton from "../components/LoginButton";
+import InputLogin from "../../components/InputLogin";
+import LoginButton from "../../components/LoginButton";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 

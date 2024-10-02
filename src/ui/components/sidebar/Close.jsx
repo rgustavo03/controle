@@ -1,0 +1,22 @@
+import React from 'react';
+import { TransitionChild } from '@headlessui/react'
+import { XMarkIcon } from '@heroicons/react/24/outline'
+
+
+
+export const Close = ({closeThis}) => {
+
+  //
+
+  return (
+    <TransitionChild>
+      <div className="absolute right-[-55px] top-0 flex h-[70px] duration-500 ease-in-out data-[closed]:opacity-0 sm:-ml-10 sm:pr-4">
+        <button type="button" onClick={() => closeThis()} className="relative rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white">
+          <span className="absolute -inset-2.5" />
+          <span className="sr-only">Close panel</span>
+          <XMarkIcon aria-hidden="true" className="h-6 w-6" />
+        </button>
+      </div>
+    </TransitionChild>
+  )
+}
