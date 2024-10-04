@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
-import { Close } from '../components/sidebar/Close';
-import { Links } from '../components/sidebar/Links';
+import { Close } from '../components/modal/Close';
+import { Links } from '../components/modal/Links';
 
 
 export const SideBar = ({open, close}) => {

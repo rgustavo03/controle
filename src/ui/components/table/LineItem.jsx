@@ -1,17 +1,11 @@
 import React from "react";
 import { CellOptions } from "./CellOptions";
+import { tipos } from "../../../data/almoxarifado";
 
 export const LineItem = ({item, altItem, deleteItem}) => {
 
 
-  function alt() {
-    altItem(item.id);
-  }
-
-
-  function del() {
-    deleteItem(item.id);
-  }
+  const tipo = tipos.find(t => t.tipo == item.tipo);
 
 
   return (
@@ -26,11 +20,11 @@ export const LineItem = ({item, altItem, deleteItem}) => {
       </td>
 
       <td className="cell-table-almoxarifado">
-        {item.tipo}
+        {tipo?.nome}
       </td>
 
       <td className="cell-table-almoxarifado relative w-[70px]">
-        <CellOptions alt={alt} del={del} />
+        <CellOptions />
       </td>
 
     </tr>

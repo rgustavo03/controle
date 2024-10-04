@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../ui/partials/login/LoginForm";
 //import axios from "axios";
 import useSession from "../hooks/useSession";
 import axiosInterceptor from "../services/axiosInterceptor";
+import { UserContext } from "../context/userContext";
 
 export default function Login() {
 
@@ -13,42 +14,44 @@ export default function Login() {
   const navigate = useNavigate(); // redirecionar páginas
   const axios = axiosInterceptor();
 
-  const { startSession, endSession } = useSession(); // funções de sessão do usuário
+  const { setUserData } = useContext(UserContext);
+
+  const { startToken, endToken } = useSession(); // funções de sessão do usuário
+
 
 
   useEffect(() => {
-    endSession();
+    endToken();
   }, []);
 
 
-  const [user, setUser] = useState(
-    { empresaId: NaN, login: '', senha: '' }
-  );
-
 
   // função é chamada em componente FormLogin
-  const login = (dataUser) => {
-    setUser(dataUser);
+  const login = (userData) => {
+    if(userData.login.length == 0) return
+
+    fetchLogin(userData);
   }
 
 
-  useEffect(() => {
-    if(user.login.length == 0) return
-    fetchLogin();
-  }, [user]);
 
-
-  const fetchLogin = async () => {
+  const fetchLogin = async (userData) => {
     try {
       await axios.post(
 
-        `${loginApiURL}`,
-        { empresaId: user.empresaId, login: user.login, senha: user.senha }
+        `${loginApiURL}`, // link api
+        {
+          empresaId: userData.empresaId, 
+          login: userData.login, 
+          senha: userData.senha 
+        }
 
       )
       .then(res => {
 
-        if(res.data.status == 200) connection(res.data.data); // sucesso conexão
+        if(res.data.status == 200) {
+          connection(res.data.data); // sucesso conexão
+        }
         else invalid(res.data.message); // erro conexão
 
       });
@@ -59,15 +62,26 @@ export default function Login() {
   }
 
 
+
   const invalid = (/** @type {string} */ msg) => {
     console.log(msg);
   }
 
 
-  const connection = (data) => {
-    startSession(data);
 
-    navigate('/controle'); // redirecionar para página controle
+  const connection = (data) => {
+
+    const userData = {
+      id: data.usuario.id,
+      email: data.usuario.email,
+      nome: data.usuario.nome
+    }
+
+    setUserData(userData); // user em UserContext
+
+    startToken(data.token);
+
+    navigate('/almoxarifados'); // redirecionar para página controle
   }
 
 

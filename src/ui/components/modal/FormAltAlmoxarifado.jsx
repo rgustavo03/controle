@@ -1,11 +1,13 @@
 import React from "react";
-import InputAlmoxarifado from "../InputAlmoxarifado";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
+import { Input } from "../form/Input"
 import { zodResolver } from "@hookform/resolvers/zod";
-import SubmitButton from "../SubmitButton";
-import CancelButton from "../CancelButton";
 import { Close } from "../../svg/Close";
+import { Button } from "../Button";
+import { Submit } from "../form/Submit";
+import { Select } from "../form/Select";
+import { tipos } from "../../../data/almoxarifado";
 
 
 const userSchema = z.object({
@@ -14,12 +16,15 @@ const userSchema = z.object({
 });
 
 
-export default function FormAltAlmoxarifado({itemAlt, alt, toggleAltOpen}) {
+export default function FormAltAlmoxarifado({itemAlt, alt, closeThis}) {
 
 
   const { register, handleSubmit } = useForm({
     resolver: zodResolver(userSchema)
   });
+
+
+  const tiposAlmoxarifados = tipos;
 
 
   const submitItem = (data) => {
@@ -36,22 +41,34 @@ export default function FormAltAlmoxarifado({itemAlt, alt, toggleAltOpen}) {
           <div className="h-[70px] flex flex-row justify-between items-center">
             <h3 className="text-base font-semibold">Alterar Almoxarifado</h3>
 
-            <div className="cursor-pointer" onClick={() => toggleAltOpen(false)}>
+            <div className="cursor-pointer" onClick={() => closeThis()}>
               <Close size="5" color="black" />
             </div>
           </div>
 
+
+          {/* Campos */}
           <div className="flex flex-col gap-3">
-            <InputAlmoxarifado type="text" label="Descrição" placeholder={itemAlt.descricao} register={{...register("descricao")}} />
-            <InputAlmoxarifado type="text" label="Tipo" placeholder={itemAlt.tipo} register={{...register("tipo")}} />
+            <Input 
+              label="Descrição" 
+              type="text" 
+              placeholder={itemAlt.descricao} 
+              register={{...register("descricao")}}
+            />
+            <Select 
+              label="Tipo" 
+              items={tiposAlmoxarifados} 
+              register={{...register("tipo")}}
+            />
           </div>
+
 
         </div>
 
 
         <div id="add-bottom" className="h-[70px] border-t flex flex-row justify-end items-center gap-3 pr-6">
-          <CancelButton toggleOpen={toggleAltOpen} />
-          <SubmitButton nome="Criar" />
+          <Button type="cancel" func={closeThis} name="Cancelar" />
+          <Submit type="generic" name="Alterar" />
         </div>
 
       </form>

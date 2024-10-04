@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
-import FormAltAlmoxarifado from "../../components/sidebar/FormAltAlmoxarifado";
+import FormAltAlmoxarifado from "../../components/modal/FormAltAlmoxarifado";
 import altAlmoxarifado from "../../../services/altAlmoxarifado";
 
 export default function AlterAlmoxarifado({itemAlt, altOpen, toggleAltOpen, token, updateListAlmoxarifados, navigate}) {
@@ -11,6 +12,7 @@ export default function AlterAlmoxarifado({itemAlt, altOpen, toggleAltOpen, toke
     const descricao = item.descricao == '' ? itemAlt.descricao : item.descricao;
     const tipo = item.tipo == 0 ? itemAlt.tipo : item.tipo;
 
+    // ALTERAR ALMOXARIFADO
     if(descricao != itemAlt.descricao || tipo != itemAlt.tipo) {
       altAlmoxarifado(id, descricao, tipo, token, updateListAlmoxarifados, navigate);
     }
@@ -36,7 +38,7 @@ export default function AlterAlmoxarifado({itemAlt, altOpen, toggleAltOpen, toke
             <DialogPanel transition className="bg-slate-500 pointer-events-auto relative h-full w-screen max-w-md transform transition duration-500 ease-in-out data-[closed]:translate-x-full sm:duration-700">
               
               {/* Conteúdo */}
-              <FormAltAlmoxarifado itemAlt={itemAlt} alt={alt} toggleAltOpen={toggleAltOpen} />
+              <FormAltAlmoxarifado itemAlt={itemAlt} alt={alt} closeThis={closeThis} />
               
             </DialogPanel>
           </div>

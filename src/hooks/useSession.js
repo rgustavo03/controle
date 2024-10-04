@@ -8,10 +8,9 @@ export default function useSession() {
 
 
 
-  const startSession = (data) => {
+  const startToken = (token) => {
     const session = {
-      token: data.token,
-      name: data.usuario.nome
+      token: token
     };
 
     setStorage(session);
@@ -19,19 +18,13 @@ export default function useSession() {
 
 
 
-  const endSession = () => {
+  const endToken = () => {
     setStorage({}); // usuario no Storage vazio
     setUser({}); // usuario vazio
   }
 
 
   
-  const getName = () => {
-    return user.name
-  }
-
-
-
   const getToken = () => {
     return user.token
   }
@@ -44,5 +37,5 @@ export default function useSession() {
 
 
 
-  return { startSession, endSession, getName, getToken }
+  return { startToken, endToken, getToken }
 }

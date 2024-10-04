@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Bars } from "../svg/Bars";
-import { User } from "../svg/User";
 import { SideBar } from "./SideBar";
 import { UserMenu } from "../components/header/UserMenu";
+import { UserContext } from "../../context/userContext";
 
-export default function Header({name}) {
+export default function Header() {
+
+
+  const { user } = useContext(UserContext);
 
 
   const [openSideBar, setOpenSideBar] = useState(false);
@@ -16,10 +19,12 @@ export default function Header({name}) {
 
 
   function nameUpdt() {
-    const lowered = name.toLowerCase();
+    if(!user.nome) return ""
+    //
+    const lowered = user.nome.toLowerCase();
     const capital = lowered.charAt(0).toLocaleUpperCase();
     const rest = lowered.slice(1);
-    //
+    
     return capital + rest
   }
 

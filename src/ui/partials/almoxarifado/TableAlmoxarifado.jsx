@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { LineItem } from "../../components/LineItem";
+import { LineItem } from "../../components/table/LineItem";
 
 export const TableAlmoxarifado = ({list, altItem, deleteItem}) => {
 

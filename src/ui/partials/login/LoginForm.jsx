@@ -1,9 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import InputLogin from "../../components/InputLogin";
-import LoginButton from "../../components/LoginButton";
+import { Input } from "../../components/form/Input";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Submit } from "../../components/form/Submit";
 
 
 const userSchema = z.object({
@@ -21,8 +21,8 @@ export default function LoginForm({login}) {
   });
 
 
-  const submitLogin = (data) => {
-    login(data);
+  const submitLogin = (userData) => {
+    login(userData);
   }
 
 
@@ -31,25 +31,28 @@ export default function LoginForm({login}) {
 
       <h2 className="text-2xl my-2">Login</h2>
 
-      <InputLogin 
+      <Input 
+        label="Id da empresa" 
         type="text" 
         placeholder="Id da empresa" 
         register={{...register("empresaId")}} 
       />
 
-      <InputLogin 
+      <Input 
+        label="Email" 
         type="text" 
         placeholder="Email" 
         register={{...register("login")}} 
       />
 
-      <InputLogin 
+      <Input 
+        label="Senha" 
         type="password" 
         placeholder="Senha" 
         register={{...register("senha")}} 
       />
 
-      <LoginButton nome="Entrar" />
+      <Submit type="session" name="Entrar" />
 
     </form>
   )

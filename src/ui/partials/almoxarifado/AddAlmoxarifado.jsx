@@ -1,9 +1,9 @@
 import React from "react";
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
-import FormCreateAlmoxarifado from "../../components/sidebar/FormCreateAlmoxarifado";
+import FormCreateAlmoxarifado from "../../components/modal/FormCreateAlmoxarifado";
 import createAlmoxarifado from "../../../services/createAlmoxarifado";
 
-export default function AddAlmoxarifado({addOpen, toggleAddOpen, updateListAlmoxarifados, token, navigate}) {
+export default function AddAlmoxarifado({addOpen, closeAdd, updateListAlmoxarifados, token, navigate}) {
 
 
   function create(data) {
@@ -14,7 +14,7 @@ export default function AddAlmoxarifado({addOpen, toggleAddOpen, updateListAlmox
 
 
   function closeThis() {
-    toggleAddOpen(false);
+    closeAdd();
   }
 
 
@@ -31,7 +31,7 @@ export default function AddAlmoxarifado({addOpen, toggleAddOpen, updateListAlmox
             <DialogPanel transition className="bg-slate-500 pointer-events-auto relative h-full w-screen max-w-md transform transition duration-500 ease-in-out data-[closed]:translate-x-full sm:duration-700">
               
               {/* Conteúdo */}
-              <FormCreateAlmoxarifado create={create} toggleAddOpen={toggleAddOpen} />
+              <FormCreateAlmoxarifado create={create} closeThis={closeThis} />
               
             </DialogPanel>
           </div>

@@ -16,9 +16,13 @@ export default async function getAlmoxarifados(token, handleSetList, navigate) {
     )
     .then(res => {
 
-      if(res.data.status == 200) handleSetList(res.data.data); // sucesso conexão
+      if(res.data.status == 200) {
+        handleSetList(res.data.data); // sucesso conexão
+      }
 
-      else console.log(res.data.message); // erro conexão
+      else {
+        console.log(res.data.message); // erro conexão
+      }
 
     })
     .catch(error => {

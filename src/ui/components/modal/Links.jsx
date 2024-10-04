@@ -1,6 +1,6 @@
 import React from 'react';
 import { DialogTitle } from '@headlessui/react'
-import { LinkSideBar } from '../LinkSideBar';
+import { LinkSideBar } from './LinkSideBar';
 
 export const Links = () => {
 
