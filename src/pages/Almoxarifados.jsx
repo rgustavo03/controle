@@ -2,21 +2,20 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useSession from "../hooks/useSession";
 import getAlmoxarifados from "../services/getAlmoxarifados";
-import AddAlmoxarifado from "../ui/partials/almoxarifado/AddAlmoxarifado";
-import AlterAlmoxarifado from "../ui/partials/almoxarifado/AlterAlmoxarifado";
 import Header from "../ui/partials/Header";
 import { TableAlmoxarifado } from "../ui/partials/almoxarifado/TableAlmoxarifado";
 import { DelAlmoxarifado } from "../ui/partials/almoxarifado/DelAlmoxarifado";
 import { Button } from "../ui/components/Button";
 import { UserContext } from "../context/userContext";
 import { AlmoxarifadoContext } from "../context/almoxarifadoContext";
+import { Modal } from "../ui/components/modal/Modal";
 
 
 const emptyItem = {
   id: 0,
   empresaId: 0,
   descricao: "",
-  tipo: "",
+  tipo: 0,
   usuarioId: 0,
   dataInclusao: "",
   dataAlteracao: null,
@@ -32,7 +31,7 @@ export default function Almoxarifados() {
 
   const { user } = useContext(UserContext);
 
-  const { getToken, endToken } = useSession();
+  const { getToken } = useSession();
 
   const [list, setList] = useState([emptyItem]);
 
@@ -52,41 +51,42 @@ export default function Almoxarifados() {
 
   useEffect(() => {
 
+    /*
     if(user.nome.length == 0) { // Acredito que isso será desnecessário eventualmente (por causa useMemo)
       endToken();
       navigate('/');
       return
     }
+    */
 
-    console.log(user);
     updateListAlmoxarifados();
 
   }, []);
-  
+
 
   // ================
 
 
-  const [addOpen, setAddOpen] = useState(false); // toggle para div de inserção de itens
+  const [modalOpen, setModalOpen] = useState(false);
 
-  function openAdd() { // Display componente de add almoxarifado
-    setAddOpen(true);
+  const [modalExec, setModalExec] = useState("");
+
+  function openModal() {
+    setModalOpen(true);
   }
 
-  function closeAdd() {
-    setAddOpen(false);
+  function closeModal() {
+    setModalOpen(false);
   }
-  
 
-  // ================
+  function newAlmoxarifado() {
+    setModalExec("new");
+    openModal();
+  }
 
-
-  const [altOpen, setAltOpen] = useState(false); // toggle para tela de alteração (aparecer ou sumir)
-
-  const [itemAlt, setItemAlt] = useState(emptyItem); // item para alteração
-
-  function toggleAltOpen(boolean) { // Display componente de alteração de almoxarifado
-    setAltOpen(boolean);
+  function altAlmoxarifado() {
+    setModalExec("alt");
+    openModal();
   }
 
 
@@ -95,21 +95,20 @@ export default function Almoxarifados() {
 
   const [delOpen, setDelOpen] = useState(false);
 
-  const [itemDel, setItemDel] = useState(emptyItem);
+  function openDelete() {
+    setDelOpen(true);
+  }
 
-  function toggleDelOpen(boolean) {
-    setDelOpen(boolean);
+  function closeDelete() {
+    setDelOpen(false);
   }
 
 
   // ================
 
 
-
-
   function updateListAlmoxarifados() {
     getAlmoxarifados(getToken(), handleSetList, navigate); // requisição API para listar Almoxarifados (axios)
-    // props (token, funcao que altera lista de almoxarifados, navigate)
   }
 
 
@@ -121,38 +120,18 @@ export default function Almoxarifados() {
 
 
 
-  const altItem = (id) => {
-    const item = list.find(i => i.id == id); // encontrar item para alterá-lo
-
-    if(!item) {
-      console.log('Erro ao encontrar item');
-      return
-    }
-    
-    setItemAlt(item);
-    setAltOpen(true);
+  function confirmDelete() {
+    openDelete(); // abrir tela de delete
+    //setAltOpen(false); // fechar tela de alteração por segurança
   }
 
 
 
-  const deleteItem = (id) => {
-    //deleteAlmoxarifado(getToken(), id, updateListAlmoxarifados, navigate);
-    const item = list.find(i => i.id == id); // encontrar item para alterá-lo
-
-    if(!item) {
-      console.log('Erro ao encontrar item');
-      return
-    }
-
-    setItemDel(item);
-    toggleDelOpen(true);
-    setAltOpen(false);
-  }
 
 
 
   if(active) return (
-    <AlmoxarifadoContext.Provider value={{ item, setItemData }}>
+    <AlmoxarifadoContext.Provider value={{ item, setItemData, confirmDelete, updateListAlmoxarifados, altAlmoxarifado, closeModal }}>
       <div id="page" className="min-h-screen bg-gray-200">
 
 
@@ -164,44 +143,25 @@ export default function Almoxarifados() {
           <div id="middle" className="flex flex-col border rounded-lg bg-white pb-5">
             <div id="middle-top" className="h-[70px] flex flex-row justify-between items-center p-6 border-b border-gray-200">
               <h3 className="text-lg text-gray-700 font-semibold">Almoxarifados</h3>
-              <Button type="add" func={openAdd} name="Novo +" />
+              <Button type="add" func={newAlmoxarifado} name="Novo +" />
             </div>
 
-            <TableAlmoxarifado 
-              list={list} 
-              altItem={altItem} 
-              deleteItem={deleteItem} 
-            />
+            <TableAlmoxarifado list={list} />
           </div>
 
         </div>
 
 
-        <AddAlmoxarifado 
-          addOpen={addOpen} 
-          closeAdd={closeAdd} 
-          updateListAlmoxarifados={updateListAlmoxarifados} 
-          token={getToken()} 
-          navigate={navigate} 
-        />
-
-
-        <AlterAlmoxarifado 
-          itemAlt={itemAlt} 
-          altOpen={altOpen} 
-          toggleAltOpen={toggleAltOpen} 
-          token={getToken()} 
-          updateListAlmoxarifados={updateListAlmoxarifados} 
-          navigate={navigate} 
+        <Modal 
+          modalOpen={modalOpen} 
+          modalExec={modalExec} 
+          navigate={navigate}
         />
 
 
         <DelAlmoxarifado 
           delOpen={delOpen} 
-          itemDel={itemDel}
-          toggleDelOpen={toggleDelOpen} 
-          token={getToken()} 
-          updateListAlmoxarifados={updateListAlmoxarifados} 
+          closeDelete={closeDelete} 
           navigate={navigate} 
         />
 

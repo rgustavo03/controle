@@ -1,22 +1,32 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useContext } from "react";
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
 import { Button } from "../../components/Button";
 
 import deleteAlmoxarifado from "../../../services/deleteAlmoxarifado";
+import useSession from "../../../hooks/useSession";
+import { AlmoxarifadoContext } from "../../../context/almoxarifadoContext";
+import { tipos } from "../../../data/almoxarifado";
 
 
-export const DelAlmoxarifado = ({delOpen, itemDel, toggleDelOpen, token, updateListAlmoxarifados, navigate}) => {
+export const DelAlmoxarifado = ({delOpen, closeDelete, navigate}) => {
 
 
-  function del() {
-    deleteAlmoxarifado(token, itemDel.id, updateListAlmoxarifados, navigate);
+  const { getToken } = useSession();
+
+  const { item, updateListAlmoxarifados } = useContext(AlmoxarifadoContext);
+
+  const tipo = tipos.find(t => t.tipo == item.tipo);
+
+
+  function deleteItem() {
+    deleteAlmoxarifado(getToken(), item.id, updateListAlmoxarifados, navigate); // api
     closeThis();
   }
 
 
   function closeThis() {
-    toggleDelOpen(false);
+    closeDelete();
   }
 
 
@@ -39,21 +49,21 @@ export const DelAlmoxarifado = ({delOpen, itemDel, toggleDelOpen, token, updateL
               <div className="h-full w-full bg-white rounded flex flex-col justify-between p-4">
 
                 <div>
-                  Excluir <span className="bg-gray-300 p-2 rounded">Id: {itemDel.id}</span>
+                  Excluir <span className="bg-gray-300 p-2 rounded">Id: {item.id}</span>
                 </div>
 
                 <div className="flex flex-col gap-4">
                   <div>
-                    Descrição: <span className="border p-2 rounded">{itemDel.descricao}</span>
+                    Descrição: <span className="border p-2 rounded">{item.descricao}</span>
                   </div>
                   <div>
-                    Tipo: <span className="border p-2 rounded">{itemDel.tipo}</span>
+                    Tipo: <span className="border p-2 rounded">{tipo?.tipo}. {tipo?.nome}</span>
                   </div>
                 </div>
 
                 <div className="flex flex-row justify-end gap-2">
                   <Button type="cancel" func={closeThis} name="Cancelar" />
-                  <Button type="excluir" func={del} name="Excluir" />
+                  <Button type="excluir" func={deleteItem} name="Excluir" />
                 </div>
 
               </div>

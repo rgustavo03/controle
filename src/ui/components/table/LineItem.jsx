@@ -2,7 +2,7 @@ import React from "react";
 import { CellOptions } from "./CellOptions";
 import { tipos } from "../../../data/almoxarifado";
 
-export const LineItem = ({item, altItem, deleteItem}) => {
+export const LineItem = ({ item }) => {
 
 
   const tipo = tipos.find(t => t.tipo == item.tipo);
@@ -24,7 +24,7 @@ export const LineItem = ({item, altItem, deleteItem}) => {
       </td>
 
       <td className="cell-table-almoxarifado relative w-[70px]">
-        <CellOptions />
+        <CellOptions item={ item } />
       </td>
 
     </tr>

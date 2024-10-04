@@ -2,7 +2,7 @@
 import React from "react";
 import { LineItem } from "../../components/table/LineItem";
 
-export const TableAlmoxarifado = ({list, altItem, deleteItem}) => {
+export const TableAlmoxarifado = ({ list }) => {
 
 
   const headers = ["Id", "Descrição", "Tipo", ""];
@@ -23,7 +23,7 @@ export const TableAlmoxarifado = ({list, altItem, deleteItem}) => {
       <tbody>
         {list.map(item => {
           return (
-            <LineItem key={item.id} item={item} altItem={altItem} deleteItem={deleteItem} />
+            <LineItem key={item.id} item={item} />
           )
         })}
       </tbody>

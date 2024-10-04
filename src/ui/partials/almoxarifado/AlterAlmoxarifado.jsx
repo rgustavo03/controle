@@ -1,24 +1,33 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useContext } from "react";
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
 import FormAltAlmoxarifado from "../../components/modal/FormAltAlmoxarifado";
 import altAlmoxarifado from "../../../services/altAlmoxarifado";
+import useSession from "../../../hooks/useSession";
+import { AlmoxarifadoContext } from "../../../context/almoxarifadoContext";
 
-export default function AlterAlmoxarifado({itemAlt, altOpen, toggleAltOpen, token, updateListAlmoxarifados, navigate}) {
+export default function AlterAlmoxarifado({itemAlt, altOpen, toggleAltOpen, updateListAlmoxarifados, navigate}) {
 
-  function alt(item) {
+
+  const { getToken } = useSession();
+
+  const { item } = useContext(AlmoxarifadoContext);
+
+
+  function alt(data) {
     const id = itemAlt.id;
 
-    const descricao = item.descricao == '' ? itemAlt.descricao : item.descricao;
-    const tipo = item.tipo == 0 ? itemAlt.tipo : item.tipo;
+    const descricao = data.descricao == '' ? itemAlt.descricao : data.descricao;
+    const tipo = data.tipo == 0 ? itemAlt.tipo : data.tipo;
 
     // ALTERAR ALMOXARIFADO
     if(descricao != itemAlt.descricao || tipo != itemAlt.tipo) {
-      altAlmoxarifado(id, descricao, tipo, token, updateListAlmoxarifados, navigate);
+      altAlmoxarifado(id, descricao, tipo, getToken(), updateListAlmoxarifados, navigate);
     }
 
     closeThis();
   }
+
 
   function closeThis() {
     toggleAltOpen(false);
