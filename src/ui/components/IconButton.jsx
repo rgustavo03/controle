@@ -25,7 +25,7 @@ export const IconButton = ({type, func}) => {
   }
 
   return (
-    <button onClick={() => func()} className={`w-full p-2 rounded-sm ${hover} flex flex-row justify-start items-center gap-2`}>
+    <button onClick={() => func()} className={`w-full py-[10px] px-2 rounded-sm ${hover} flex flex-row justify-start items-center gap-2`}>
 
       {icon}
       

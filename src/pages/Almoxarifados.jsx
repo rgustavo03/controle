@@ -1,14 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useSession from "../hooks/useSession";
-import getAlmoxarifados from "../services/getAlmoxarifados";
+import getAlmoxarifados from "../services/almoxarifado/getAlmoxarifados";
 import Header from "../ui/partials/Header";
 import { TableAlmoxarifado } from "../ui/partials/almoxarifado/TableAlmoxarifado";
 import { DelAlmoxarifado } from "../ui/partials/almoxarifado/DelAlmoxarifado";
 import { Button } from "../ui/components/Button";
 import { UserContext } from "../context/userContext";
 import { AlmoxarifadoContext } from "../context/almoxarifadoContext";
-import { Modal } from "../ui/components/modal/Modal";
+import { Modal } from "../ui/partials/Modal";
+import { FormAlmoxarifado } from "../ui/partials/almoxarifado/FormAlmoxarifado";
 
 
 const emptyItem = {
@@ -69,7 +70,7 @@ export default function Almoxarifados() {
 
   const [modalOpen, setModalOpen] = useState(false);
 
-  const [modalExec, setModalExec] = useState("");
+  const [modalType, setModalType] = useState("");
 
   function openModal() {
     setModalOpen(true);
@@ -80,12 +81,12 @@ export default function Almoxarifados() {
   }
 
   function newAlmoxarifado() {
-    setModalExec("new");
+    setModalType("new");
     openModal();
   }
 
   function altAlmoxarifado() {
-    setModalExec("alt");
+    setModalType("alt");
     openModal();
   }
 
@@ -131,7 +132,7 @@ export default function Almoxarifados() {
 
 
   if(active) return (
-    <AlmoxarifadoContext.Provider value={{ item, setItemData, confirmDelete, updateListAlmoxarifados, altAlmoxarifado, closeModal }}>
+    <AlmoxarifadoContext.Provider value={{ item, setItemData, confirmDelete, updateListAlmoxarifados, altAlmoxarifado, modalType, closeModal }}>
       <div id="page" className="min-h-screen bg-gray-200">
 
 
@@ -154,8 +155,8 @@ export default function Almoxarifados() {
 
         <Modal 
           modalOpen={modalOpen} 
-          modalExec={modalExec} 
-          navigate={navigate}
+          closeModal={closeModal} 
+          children={<FormAlmoxarifado navigate={navigate} />} // formulário usa AlmoxarifadoContext
         />
 
 

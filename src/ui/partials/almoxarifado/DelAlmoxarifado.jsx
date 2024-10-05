@@ -2,8 +2,7 @@
 import React, { useContext } from "react";
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
 import { Button } from "../../components/Button";
-
-import deleteAlmoxarifado from "../../../services/deleteAlmoxarifado";
+import deleteAlmoxarifado from "../../../services/almoxarifado/deleteAlmoxarifado";
 import useSession from "../../../hooks/useSession";
 import { AlmoxarifadoContext } from "../../../context/almoxarifadoContext";
 import { tipos } from "../../../data/almoxarifado";

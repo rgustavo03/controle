@@ -1,13 +1,10 @@
 import React from "react"
 
 
-export const Option = ({label, value}) => {
-
-
-  //
+export const Option = ({labelOption, value}) => {
 
 
   return (
-    <option value={value}>{label}</option>
+    <option value={value}>{labelOption}</option>
   )
 }

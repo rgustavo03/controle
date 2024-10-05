@@ -1,4 +1,6 @@
-import axiosInterceptor from "./axiosInterceptor";
+// api usada em Modal
+
+import axiosInterceptor from "../axiosInterceptor";
 
 
 export default async function createAlmoxarifado(data, token, updateListAlmoxarifados, navigate) {

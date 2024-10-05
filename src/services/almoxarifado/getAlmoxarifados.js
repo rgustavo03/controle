@@ -1,4 +1,7 @@
-import axiosInterceptor from "./axiosInterceptor";
+// api usada em Almoxarifados.jsx
+
+import axiosInterceptor from "../axiosInterceptor";
+
 
 export default async function getAlmoxarifados(token, handleSetList, navigate) {
 

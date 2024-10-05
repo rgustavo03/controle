@@ -36,7 +36,7 @@ export const CellOptions = ({ item }) => { // com context, precisa receber apena
       </MenuButton>
 
 
-      <MenuItems transition anchor="bottom end" className="w-52 origin-top-right rounded bg-white p-1 text-sm/6 text-black drop-shadow-2xl transition duration-100 ease-out">
+      <MenuItems transition anchor="bottom end" className="w-48 origin-top-right rounded bg-white p-1 text-sm/6 text-black drop-shadow-2xl transition duration-100 ease-out">
 
         <MenuItem>
           <IconButton type="alt" func={alt} />

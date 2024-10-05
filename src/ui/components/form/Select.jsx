@@ -2,10 +2,7 @@ import React from "react"
 import { Option } from "./Option"
 
 
-export const Select = ({label, items, register}) => {
-
-
-  //
+export const Select = ({label, list, register}) => {
 
 
   return (
@@ -22,10 +19,10 @@ export const Select = ({label, items, register}) => {
         {...register}
         className="border border-gray-400 rounded p-2 text-base"
       >
-        {items.map(t => {
+        {list.map(option => {
           //
           return (
-            <Option key={t.tipo} label={t.nome} value={t.tipo} />
+            <Option key={option.key} labelOption={option.label} value={option.value} />
           )
         })}
       </select>

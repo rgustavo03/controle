@@ -1,5 +1,7 @@
+// api usada em partials/almoxarifado/DelAlmoxarifado
 
-import axiosInterceptor from "./axiosInterceptor";
+import axiosInterceptor from "../axiosInterceptor";
+
 
 export default async function deleteAlmoxarifado(token, id, updateListAlmoxarifados, navigate) {
 

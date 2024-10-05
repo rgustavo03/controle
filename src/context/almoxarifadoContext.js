@@ -12,7 +12,7 @@ const emptyItem = {
   dataExclusao: null
 }
 
-
+const exec = "";
 
 
 // fazer tipagem de uma forma não typescript ;---;
@@ -21,8 +21,9 @@ const initialState = {
   setItemData: (emptyItem) => {},
   updateListAlmoxarifados: () => {},
   confirmDelete: () => {},
-  closeModal: () => {},
-  altAlmoxarifado: () => {}
+  altAlmoxarifado: () => {},
+  modalType: exec,
+  closeModal: () => {}
 };
 
 
