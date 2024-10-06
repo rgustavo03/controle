@@ -11,7 +11,7 @@ export const Button = ({type, func, name}) => {
     style = "bg-slate-900 text-white rounded p-2 transition hover:bg-slate-700";
   }
   if(type == 'excluir') {
-    style = "bg-red-700 text-white rounded p-2 transition hover:bg-red-800";
+    style = "bg-red-700 text-white rounded p-2 px-4 transition hover:bg-red-800";
   }
 
 

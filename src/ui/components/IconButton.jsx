@@ -9,17 +9,17 @@ export const IconButton = ({type, func}) => {
   let hover = '';
 
   if(type == 'alt') {
-    icon = <PencilIcon className="text-gray-600 size-5" />
+    icon = <PencilIcon className="text-gray-400 size-6" />
     name = 'Alterar';
     hover = 'hover:bg-slate-100';
   }
   if(type == 'del') {
-    icon = <TrashIcon className="text-red-600 size-5" />;
+    icon = <TrashIcon className="text-gray-400 size-6" />;
     name = 'Excluir';
     hover = 'hover:bg-red-100';
   }
   if(type == 'logout') {
-    icon = <LockClosedIcon className="text-gray-600 size-5" />;
+    icon = <LockClosedIcon className="text-gray-400 size-6" />;
     name = 'Sair';
     hover = 'hover:bg-slate-100';
   }
@@ -29,7 +29,7 @@ export const IconButton = ({type, func}) => {
 
       {icon}
       
-      <p className="text-base">
+      <p className="text-base text-gray-900">
         {name}
       </p>
 

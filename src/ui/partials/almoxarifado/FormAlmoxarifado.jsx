@@ -34,9 +34,6 @@ export const FormAlmoxarifado = ({ navigate }) => {
   const { getToken } = useSession();
 
 
-  // item, modalExec, create, alt, closeThis
-
-
   // =============
 
 
@@ -134,20 +131,30 @@ export const FormAlmoxarifado = ({ navigate }) => {
           </div>
 
 
+
           {/* Campos */}
           <div className="flex flex-col gap-3">
+
+            {modalType == "alt" && (
+              <span className="w-fit bg-gray-200 text-gray-800 p-[6px] rounded">Id: {item.id}</span>
+            )}
+
             <Input 
               label="Descrição" 
               type="text"
               placeholder={modalType == "alt"? item.descricao : "Descrição"} 
               register={{...register("descricao")}}
             />
+
             <Select 
               label="Tipo" 
               list={listTipos}
               register={{...register("tipo")}} 
             />
+
           </div>
+          {/* Campos */}
+
 
 
         </div>

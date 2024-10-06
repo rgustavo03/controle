@@ -6,6 +6,7 @@ import deleteAlmoxarifado from "../../../services/almoxarifado/deleteAlmoxarifad
 import useSession from "../../../hooks/useSession";
 import { AlmoxarifadoContext } from "../../../context/almoxarifadoContext";
 import { tipos } from "../../../data/almoxarifado";
+import { ExclamationCircleIcon } from "@heroicons/react/16/solid";
 
 
 export const DelAlmoxarifado = ({delOpen, closeDelete, navigate}) => {
@@ -39,30 +40,33 @@ export const DelAlmoxarifado = ({delOpen, closeDelete, navigate}) => {
 
 
           <div className="fixed flex max-w-full">
-            <DialogPanel transition className="bg-slate-500 pointer-events-auto relative h-[200px] w-screen max-w-md transform transition duration-500 ease-in-out data-[closed]:opacity-0 sm:duration-700">
+            <DialogPanel transition className="bg-none pointer-events-auto relative h-min w-min max-w-md transform transition duration-500 ease-in-out data-[closed]:opacity-0 sm:duration-700">
               
 
 
 
               {/* Conteúdo */} {/* Caso componentizar, props: ({itemDel, closeThis, del}) */}
-              <div className="h-full w-full bg-white rounded flex flex-col justify-between p-4">
+              <div id="delete-screen" className="h-min w-min bg-white rounded-lg flex flex-row p-5">
 
-                <div>
-                  Excluir <span className="bg-gray-300 p-2 rounded">Id: {item.id}</span>
+                <div id="delete-icone-div" className="w-10 flex justify-center pt-2">
+                  <ExclamationCircleIcon className="h-min rounded-full size-10 text-red-100 bg-red-500" />
                 </div>
 
-                <div className="flex flex-col gap-4">
-                  <div>
-                    Descrição: <span className="border p-2 rounded">{item.descricao}</span>
-                  </div>
-                  <div>
-                    Tipo: <span className="border p-2 rounded">{tipo?.tipo}. {tipo?.nome}</span>
-                  </div>
-                </div>
+                <div id="delete-info" className="w-[420px] flex flex-col gap-3">
 
-                <div className="flex flex-row justify-end gap-2">
-                  <Button type="cancel" func={closeThis} name="Cancelar" />
-                  <Button type="excluir" func={deleteItem} name="Excluir" />
+                  <div id="delete-top" className="py-2 px-3 flex flex-col gap-2">
+                    <h3 className="text-lg font-bold text-gray-600">Remover Almoxarifado</h3>
+                    <div className="flex flex-row items-center gap-2">
+                      <h6 className="text-md text-gray-700">Deseja remover o almoxarifado?</h6>
+                      <span className="bg-gray-200 text-gray-800 p-[6px] rounded">Id: {item.id}</span>
+                    </div>
+                  </div>
+
+                  <div id="delete-bottom" className="flex flex-row gap-2 justify-end">
+                    <Button type="cancel" func={closeThis} name="Cancelar" />
+                    <Button type="excluir" func={deleteItem} name="Deletar" />
+                  </div>
+
                 </div>
 
               </div>
