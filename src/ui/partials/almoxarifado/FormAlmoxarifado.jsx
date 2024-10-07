@@ -163,7 +163,7 @@ export const FormAlmoxarifado = ({ navigate }) => {
 
         <div id="add-bottom" className="h-[70px] border-t flex flex-row justify-end items-center gap-3 pr-6">
           <Button type="cancel" func={closeModal} name="Cancelar" />
-          <Submit type="generic" name="Criar" />
+          <Submit type="generic" name={modalType == "new" ? "Criar" : "Alterar"} />
         </div>
 
 

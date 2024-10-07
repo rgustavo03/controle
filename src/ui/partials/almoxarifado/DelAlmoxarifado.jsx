@@ -52,11 +52,11 @@ export const DelAlmoxarifado = ({delOpen, closeDelete, navigate}) => {
                   <ExclamationCircleIcon className="h-min rounded-full size-10 text-red-100 bg-red-500" />
                 </div>
 
-                <div id="delete-info" className="w-[420px] flex flex-col gap-3">
+                <div id="delete-info" className="min-w-[300px] md:w-[420px] flex flex-col gap-3">
 
-                  <div id="delete-top" className="py-2 px-3 flex flex-col gap-2">
+                  <div id="delete-top" className="py-2 px-1 sm:px-3 flex flex-col gap-2">
                     <h3 className="text-lg font-bold text-gray-600">Remover Almoxarifado</h3>
-                    <div className="flex flex-row items-center gap-2">
+                    <div className="flex flex-col md:flex-row items-start md:items-center gap-2">
                       <h6 className="text-md text-gray-700">Deseja remover o almoxarifado?</h6>
                       <span className="bg-gray-200 text-gray-800 p-[6px] rounded">Id: {item.id}</span>
                     </div>
