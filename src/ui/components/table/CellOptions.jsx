@@ -12,7 +12,7 @@ export const CellOptions = ({ item }) => { // com context, precisa receber apena
   // { Alt, Del } useContext
 
 
-  const { setItemData, altAlmoxarifado, confirmDelete } = useContext(AlmoxarifadoContext);
+  const { setItemData, altAlmoxarifado, openDelete } = useContext(AlmoxarifadoContext);
 
 
   function alt() {
@@ -23,7 +23,7 @@ export const CellOptions = ({ item }) => { // com context, precisa receber apena
 
   function del() {
     setItemData(item);
-    confirmDelete();
+    openDelete();
   }
 
 

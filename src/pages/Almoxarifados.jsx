@@ -10,6 +10,7 @@ import { UserContext } from "../context/userContext";
 import { AlmoxarifadoContext } from "../context/almoxarifadoContext";
 import { Modal } from "../ui/partials/Modal";
 import { FormAlmoxarifado } from "../ui/partials/almoxarifado/FormAlmoxarifado";
+import { Delete } from "../ui/partials/Delete";
 
 
 const emptyItem = {
@@ -98,6 +99,7 @@ export default function Almoxarifados() {
 
   function openDelete() {
     setDelOpen(true);
+    closeModal();
   }
 
   function closeDelete() {
@@ -121,18 +123,11 @@ export default function Almoxarifados() {
 
 
 
-  function confirmDelete() {
-    openDelete(); // abrir tela de delete
-    //setAltOpen(false); // fechar tela de alteração por segurança
-  }
-
-
-
 
 
 
   if(active) return (
-    <AlmoxarifadoContext.Provider value={{ item, setItemData, confirmDelete, updateListAlmoxarifados, altAlmoxarifado, modalType, closeModal }}>
+    <AlmoxarifadoContext.Provider value={{ item, setItemData, updateListAlmoxarifados, altAlmoxarifado, modalType, closeModal, openDelete, closeDelete }}>
       <div id="page" className="min-h-screen bg-gray-200">
 
 
@@ -160,10 +155,10 @@ export default function Almoxarifados() {
         />
 
 
-        <DelAlmoxarifado 
+        <Delete 
           delOpen={delOpen} 
           closeDelete={closeDelete} 
-          navigate={navigate} 
+          children={<DelAlmoxarifado navigate={navigate} />} 
         />
 
 

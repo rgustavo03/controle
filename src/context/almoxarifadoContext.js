@@ -20,10 +20,11 @@ const initialState = {
   item: emptyItem,
   setItemData: (emptyItem) => {},
   updateListAlmoxarifados: () => {},
-  confirmDelete: () => {},
   altAlmoxarifado: () => {},
   modalType: exec,
-  closeModal: () => {}
+  closeModal: () => {},
+  openDelete: () => {},
+  closeDelete: () => {}
 };
 
 
