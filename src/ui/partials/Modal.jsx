@@ -21,6 +21,7 @@ export const Modal = ({ modalOpen, closeModal, children }) => {
           <div className="h-full fixed right-0 flex max-w-full">
             <DialogPanel transition className="bg-slate-500 pointer-events-auto relative h-full w-screen max-w-md transform transition duration-500 ease-in-out data-[closed]:translate-x-full sm:duration-700">
               
+              
               {/* Conteúdo */}
               {children}
               

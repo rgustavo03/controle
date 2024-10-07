@@ -15,7 +15,7 @@ export const TableAlmoxarifado = ({ list }) => {
           {headers.map(header => {
             //
             return (
-              <th key={header} className="text-base font-semibold text-gray-900 p-3 px-4" >{header}</th>
+              <th key={header} className="text-[15px] font-semibold text-gray-800 p-3 px-4" >{header}</th>
             )
           })}
         </tr>

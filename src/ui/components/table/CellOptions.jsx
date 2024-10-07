@@ -31,7 +31,7 @@ export const CellOptions = ({ item }) => { // com context, precisa receber apena
     <Menu>
 
 
-      <MenuButton className="inline-flex items-center p-3 rounded data-[hover]:bg-gray-100 data-[open]:bg-gray-100">
+      <MenuButton className="inline-flex items-center py-4 rounded data-[hover]:bg-gray-100 data-[open]:bg-gray-100">
         <Ellipsis size="7" color="black" />
       </MenuButton>
 

@@ -111,7 +111,7 @@ export const FormAlmoxarifado = ({ navigate }) => {
 
 
   return (
-    <div className="h-full flex flex-col bg-white">
+    <div className="h-full w-full flex flex-col bg-white">
       <form onSubmit={handleSubmit(submitItem)} className="w-full h-full flex flex-col justify-between">
 
 
@@ -119,15 +119,15 @@ export const FormAlmoxarifado = ({ navigate }) => {
         <div id="add-top" className="flex flex-col px-6">
 
 
-          <div className="h-[70px] flex flex-row justify-between items-center">
+          <div className="h-[70px] w-fit flex flex-row justify-between items-center">
             <h3 className="text-base font-semibold">
               {modalType == "new" && "Novo Almoxarifado"}
               {modalType == "alt" && "Alterar Almoxarifado"}
             </h3>
 
-            <div className="cursor-pointer" onClick={() => closeModal()}>
+            <button className="cursor-pointer" onClick={() => closeModal()}>
               <Close size="5" color="black" />
-            </div>
+            </button>
           </div>
 
 

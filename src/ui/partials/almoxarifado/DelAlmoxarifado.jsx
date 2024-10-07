@@ -46,7 +46,7 @@ export const DelAlmoxarifado = ({delOpen, closeDelete, navigate}) => {
 
 
               {/* Conteúdo */} {/* Caso componentizar, props: ({itemDel, closeThis, del}) */}
-              <div id="delete-screen" className="h-min w-min bg-white rounded-lg flex flex-row p-5">
+              <div id="delete-screen" className="h-min w-min bg-white rounded-lg flex flex-col sm:flex-row p-5">
 
                 <div id="delete-icone-div" className="w-10 flex justify-center pt-2">
                   <ExclamationCircleIcon className="h-min rounded-full size-10 text-red-100 bg-red-500" />

@@ -87,13 +87,15 @@ export default function Login() {
 
 
   return (
-    <div id="page-login" className="flex flex-row h-screen">
+    <div id="page-login" className="flex flex-col h-screen md:flex-row-reverse">
 
-      <section id="login-section" className="p-20 flex justify-center">
-        <LoginForm login={login} />
+      <section id="info-login-section" className="h-[70px] md:flex-auto md:h-screen bg-slate-900 flex flex-row justify-center items:center md:justify-start">
+        Icon
       </section>
 
-      <section id="info-login-section" className="flex-auto bg-slate-900"></section>
+      <section id="login-section" className="flex justify-center items-center p-2 py-12 md:p-10 lg:p-20">
+        <LoginForm login={login} />
+      </section>
 
     </div>
   )

@@ -9,7 +9,7 @@ export const LineItem = ({ item }) => {
 
 
   return (
-    <tr className="border-b border-neutral-200">
+    <tr className="border-b border-neutral-200 text-[15px] sm:text-[16px]">
 
       <td className="cell-table-almoxarifado">
         {item.id}
@@ -23,7 +23,7 @@ export const LineItem = ({ item }) => {
         {tipo?.nome}
       </td>
 
-      <td className="cell-table-almoxarifado relative w-[70px]">
+      <td className="cell-table-almoxarifado relative w-[50px] sm:w-[70px]">
         <CellOptions item={ item } />
       </td>
 
