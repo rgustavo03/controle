@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './index.css'
-import Index from './router'
+import Index from './router/Index'
 import { UserContext } from './context/userContext';
 
 

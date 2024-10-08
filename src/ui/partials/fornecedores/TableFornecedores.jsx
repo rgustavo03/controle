@@ -1,11 +1,13 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { LineItem } from "../../components/table/almoxarifado/LineItem";
-
-export const TableAlmoxarifado = ({ list }) => {
+import { LineItem } from "../../components/table/fornecedores/LineItem";
 
 
-  const headers = ["Id", "Descrição", "Tipo", ""];
+
+export const TableFornecedores = ({ list }) => {
+
+
+  const headers = ["Id", "Razão Social", "CPF / CNPJ", "Email", "Telefone", "Ativo", ""];
 
 
   return (
@@ -30,5 +32,3 @@ export const TableAlmoxarifado = ({ list }) => {
     </table>
   )
 }
-
-// <LineItem key item   excluir   alterar   />

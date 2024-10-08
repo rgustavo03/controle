@@ -7,22 +7,11 @@ import { TableAlmoxarifado } from "../ui/partials/almoxarifado/TableAlmoxarifado
 import { DelAlmoxarifado } from "../ui/partials/almoxarifado/DelAlmoxarifado";
 import { Button } from "../ui/components/Button";
 import { UserContext } from "../context/userContext";
-import { AlmoxarifadoContext } from "../context/almoxarifadoContext";
+import { AlmoxarifadoContext, emptyItem } from "../context/almoxarifadoContext";
 import { Modal } from "../ui/partials/Modal";
 import { FormAlmoxarifado } from "../ui/partials/almoxarifado/FormAlmoxarifado";
 import { Delete } from "../ui/partials/Delete";
 
-
-const emptyItem = {
-  id: 0,
-  empresaId: 0,
-  descricao: "",
-  tipo: 0,
-  usuarioId: 0,
-  dataInclusao: "",
-  dataAlteracao: null,
-  dataExclusao: null
-}
 
 
 export default function Almoxarifados() {
@@ -115,7 +104,6 @@ export default function Almoxarifados() {
   }
 
 
-
   function handleSetList(data) {
     setList(data);
     setActive(true);
@@ -128,7 +116,7 @@ export default function Almoxarifados() {
 
   if(active) return (
     <AlmoxarifadoContext.Provider value={{ item, setItemData, updateListAlmoxarifados, altAlmoxarifado, modalType, closeModal, openDelete, closeDelete }}>
-      <div id="page" className="min-h-screen bg-gray-200">
+      <div id="page-almoxarifado" className="min-h-screen bg-gray-200">
 
 
         <Header />

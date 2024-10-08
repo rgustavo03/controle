@@ -2,6 +2,7 @@ import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "../pages/Login";
 import Almoxarifados from "../pages/Almoxarifados";
+import { Fornecedores } from "../pages/Fornecedores";
 
 
 export default function Index() {
@@ -14,6 +15,10 @@ export default function Index() {
     {
       path: '/almoxarifados',
       element: <Almoxarifados />
+    },
+    {
+      path: '/fornecedores',
+      element: <Fornecedores />
     }
   ]);
 

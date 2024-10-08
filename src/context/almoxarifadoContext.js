@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
 
-const emptyItem = {
+export const emptyItem = {
   id: 0,
   empresaId: 0,
   descricao: "",

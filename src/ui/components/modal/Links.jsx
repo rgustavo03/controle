@@ -13,12 +13,8 @@ export const Links = () => {
       </div>
 
       <div className="relative mt-4 flex-1 flex flex-col px-2">
-        <LinkSideBar link="/comandas" text="Comandas" />
-        <LinkSideBar link="/zona-atendimento" text="Zona Atendimento" />
-        <LinkSideBar link="/local-atendimento" text="Local Atentidmento" />
-        <LinkSideBar link="/forma-pagamento" text="Forma Pagamento" />
-        <LinkSideBar link="/usuarios" text="Usuarios" />
-        <LinkSideBar link="/perfil-acesso" text="Perfil Acesso" />
+        <LinkSideBar link="/almoxarifados" text="Almoxarifados" />
+        <LinkSideBar link="/fornecedores" text="Fornecedores" />
       </div>
     </div>
   )

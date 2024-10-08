@@ -1,15 +1,12 @@
 import React, { useContext } from "react"
 
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { Ellipsis } from "../../svg/Ellipsis"
-import { IconButton } from "../IconButton"
-import { AlmoxarifadoContext } from "../../../context/almoxarifadoContext"
+import { Ellipsis } from "../../../svg/Ellipsis"
+import { IconButton } from "../../IconButton"
+import { AlmoxarifadoContext } from "../../../../context/almoxarifadoContext"
 
 
-export const CellOptions = ({ item }) => { // com context, precisa receber apenas item.id de props
-
-  // Usar Context para chamar funções de Alt e Del aqui mesmo (evitar todo o caminho de props até aqui)
-  // { Alt, Del } useContext
+export const CellOptions = ({ item }) => {
 
 
   const { setItemData, altAlmoxarifado, openDelete } = useContext(AlmoxarifadoContext);
