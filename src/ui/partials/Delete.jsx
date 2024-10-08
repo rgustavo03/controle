@@ -3,7 +3,7 @@ import React from "react";
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
 
 
-export const Delete = ({delOpen, closeDelete, children}) => {
+export const Delete = ({children, delOpen, closeDelete}) => {
 
 
   //

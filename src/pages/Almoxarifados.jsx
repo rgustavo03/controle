@@ -136,18 +136,14 @@ export default function Almoxarifados() {
         </div>
 
 
-        <Modal 
-          modalOpen={modalOpen} 
-          closeModal={closeModal} 
-          children={<FormAlmoxarifado navigate={navigate} />} // formulário usa AlmoxarifadoContext
-        />
+        <Modal modalOpen={modalOpen} closeModal={closeModal}>
+          <FormAlmoxarifado navigate={navigate} />
+        </Modal>
 
 
-        <Delete 
-          delOpen={delOpen} 
-          closeDelete={closeDelete} 
-          children={<DelAlmoxarifado navigate={navigate} />} 
-        />
+        <Delete delOpen={delOpen} closeDelete={closeDelete}>
+          <DelAlmoxarifado navigate={navigate} />
+        </Delete>
 
 
       </div>

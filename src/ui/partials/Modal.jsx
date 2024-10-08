@@ -3,7 +3,7 @@ import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
 
 
 
-export const Modal = ({ modalOpen, closeModal, children }) => {
+export const Modal = ({ children, modalOpen, closeModal }) => {
 
   
   

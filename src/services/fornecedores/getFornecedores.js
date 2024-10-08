@@ -14,8 +14,6 @@ export default async function getFornecedores(token, idUsuario, handleSetList, n
     )
     .then(res => {
 
-      console.log(res.data);
-
       if(res.data.status == 200) {
         handleSetList(res.data.data); // sucesso conexão
       }

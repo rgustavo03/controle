@@ -1,34 +1,16 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { emptyItem, FornecedoresContext } from "../context/fornecedoresContext"
 import Header from "../ui/partials/Header"
-import { UserContext } from "../context/userContext";
-import getFornecedores from "../services/fornecedores/getFornecedores";
-import useSession from "../hooks/useSession";
 import { useNavigate } from "react-router-dom";
-import createFornecedor from "../services/fornecedores/createFornecedor";
-import { Button } from "../ui/components/Button";
-import { TableFornecedores } from "../ui/partials/fornecedores/TableFornecedores";
 import { Delete } from "../ui/partials/Delete";
 import { DelFornecedor } from "../ui/partials/fornecedores/DelFornecedor";
+import { ListFornecedores } from "../ui/partials/fornecedores/ListFornecedores";
+import { FormFornecedor } from "../ui/partials/fornecedores/FormFornecedor";
 
 
-export const Fornecedores = () => {
+export const Fornecedores = ({exec}) => {
 
   const navigate = useNavigate();
-
-  const { user } = useContext(UserContext); // user.id para listar
-
-  const { getToken } = useSession();
-
-  const [list, setList] = useState([]);
-
-
-  // ==============
-
-
-  useEffect(() => {
-    updateListFornecedores();
-  }, []);
 
 
   // ==============
@@ -44,14 +26,27 @@ export const Fornecedores = () => {
   // ==============
 
 
-  function newFornecedor() {
-    //
+  const [listOn, setListOn] = useState(false);
+  const [formOn, setFormOn] = useState(false);
+
+  function openList() {
+    setListOn(true);
+    setFormOn(false);
   }
 
-  function altFornecedor() {
-    //
-    console.log('aaalllttt')
+  function openForm() {
+    setFormOn(true);
+    setListOn(false);
   }
+
+  useEffect(() => {
+    if(exec == "list") {
+      openList();
+    }
+    if(exec == "new" || exec == "alt") {
+      openForm();
+    }
+  },[exec]);
 
 
   // ==============
@@ -68,84 +63,33 @@ export const Fornecedores = () => {
   }
 
 
-  // ==============
-
-
-  function updateListFornecedores() {
-    getFornecedores(getToken(), user.id, handleSetList, navigate);
-  }
-
-
-  function handleSetList(data) {
-    setList(data);
-  }
-
 
 
   return (
-    <FornecedoresContext.Provider value={{item, setItemData, updateListFornecedores, altFornecedor, openDelete, closeDelete}}>
+    <FornecedoresContext.Provider value={{item, setItemData, openDelete, closeDelete}}>
       <div id="page-fornecedores" className="min-h-screen bg-gray-200">
 
 
         <Header />
 
 
-        <div id="content" className="flex flex-col mt-10 px-2 md:px-10">
+        {/*  Conteúdo  */}
+        <div id="content" className="flex flex-col my-10 px-2 md:px-10">
 
-          <div id="middle" className="flex flex-col border rounded-md md:rounded-lg bg-white pb-5">
-            <div id="middle-top" className="h-[70px] flex flex-row justify-between items-center p-4 md:p-6 border-b border-gray-200">
-              <h3 className="text-lg text-gray-700 font-semibold">Fornecedores</h3>
-              <Button type="add" func={newFornecedor} name="Novo +" />
-            </div>
+          <ListFornecedores listOn={listOn} /> 
 
-            <TableFornecedores list={list} />
-          </div>
+          <FormFornecedor formOn={formOn} exec={exec} /> 
 
         </div>
+        {/*  Conteúdo  */}
 
 
-        <Delete 
-          delOpen={delOpen} 
-          closeDelete={closeDelete} 
-          children={<DelFornecedor navigate={navigate} />} 
-        />
+        <Delete delOpen={delOpen} closeDelete={closeDelete}>
+          <DelFornecedor navigate={navigate} />
+        </Delete>
 
 
       </div>
     </FornecedoresContext.Provider>
   )
 }
-
-// https://stackoverflow.com/questions/68528582/how-to-use-usecontext-to-translate-different-pages
-
-
-/*
-const data = {
-  empresaId: 1,
-  nomeRazaoSocial: "GUS 2",
-  cpfCnpj: "90982039988",
-  telefone: "123456789",
-  email: "string",
-  rgInscricaoEstadual: "string",
-  tipo: 1,
-  optanteSimples: true,
-  limiteCredito: 0,
-  numeroPisPasepNit: "string",
-  cep: "string",
-  cidade: "string",
-  uf: 11,
-  logradouro: "string",
-  numero: "string",
-  bairro: "string",
-  complemento: "string",
-  codigoIbge: 0,
-  nomeFantasia: "string",
-  atividade: 1,
-  crt: 1,
-  liberado: true,
-  desconto: 0,
-  formaPagamentoId: null,
-  condicaoPagamentoId: null,
-  inscricaoMunicipal: "string"
-}
-*/

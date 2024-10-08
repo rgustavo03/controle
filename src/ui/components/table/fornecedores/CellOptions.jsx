@@ -4,17 +4,19 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Ellipsis } from "../../../svg/Ellipsis"
 import { IconButton } from "../../IconButton"
 import { FornecedoresContext } from "../../../../context/fornecedoresContext"
+import { useNavigate } from "react-router-dom"
 
 
 export const CellOptions = ({ item }) => {
 
+  const navigate = useNavigate();
   
-  const { setItemData, altFornecedor, openDelete } = useContext(FornecedoresContext);
+  const { setItemData, openDelete } = useContext(FornecedoresContext);
 
 
   function alt() {
     setItemData(item);
-    altFornecedor();
+    navigate(`/fornecedores/form/${item.id}`);
   }
 
 
