@@ -27,13 +27,7 @@ export const Fornecedores = () => {
 
 
   useEffect(() => {
-    //console.log(user);
-
     updateListFornecedores();
-
-    //createFornecedor(data, getToken(), updateListFornecedores, navigate);
-
-    console.log(list);
   }, []);
 
 
@@ -122,7 +116,7 @@ export const Fornecedores = () => {
   )
 }
 
-
+// https://stackoverflow.com/questions/68528582/how-to-use-usecontext-to-translate-different-pages
 
 
 /*

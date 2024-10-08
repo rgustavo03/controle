@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "../pages/Login";
 import Almoxarifados from "../pages/Almoxarifados";
 import { Fornecedores } from "../pages/Fornecedores";
+import { CadastroFornecedor } from "../pages/CadastroFornecedor";
 
 
 export default function Index() {
@@ -19,6 +20,10 @@ export default function Index() {
     {
       path: '/fornecedores',
       element: <Fornecedores />
+    },
+    {
+      path: '/cadastrar-fornecedor',
+      element: <CadastroFornecedor />
     }
   ]);
 
