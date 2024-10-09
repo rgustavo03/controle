@@ -9,7 +9,7 @@ export const Input = ({label, type, placeholder, register}) => {
 
       <label 
         htmlFor={register.name}
-        className="text-sm font-bold text-gray-500"
+        className="text-sm font-semibold text-gray-700"
       >
         {label}
       </label>

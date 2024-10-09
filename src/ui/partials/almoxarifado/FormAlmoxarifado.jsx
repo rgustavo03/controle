@@ -16,7 +16,7 @@ import { z } from "zod";
 import { UserContext } from "../../../context/userContext";
 
 
-const userSchema = z.object({
+const almoxarifadoSchema = z.object({
   descricao: z.string().min(1),
   tipo: z.coerce.number().min(1)
 });
@@ -38,7 +38,7 @@ export const FormAlmoxarifado = ({ navigate }) => {
 
 
   const { register, handleSubmit } = useForm({
-    resolver: zodResolver(userSchema)
+    resolver: zodResolver(almoxarifadoSchema)
   });
 
 
