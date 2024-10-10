@@ -47,7 +47,7 @@ export default function Header() {
 
       <div id="user" className="flex justify-center items-center">
 
-        <h2 className="text-lg text-black">
+        <h2 className="text-base text-black">
           {nameUpdt()}
         </h2>
 

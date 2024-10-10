@@ -2,7 +2,7 @@ import React from "react"
 import { Option } from "./Option"
 
 
-export const Select = ({label, list, register}) => {
+export const SelectUf = ({label, list, register, handleChange}) => {
 
 
   return (
@@ -17,6 +17,7 @@ export const Select = ({label, list, register}) => {
 
       <select 
         {...register}
+        onChange={handleChange}
         className="border border-gray-400 rounded p-2 text-base"
       >
         {list.map(option => {

@@ -5,7 +5,7 @@ export const Input = ({label, type, placeholder, register}) => {
   //
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex-1 flex flex-col gap-1">
 
       <label 
         htmlFor={register.name}
