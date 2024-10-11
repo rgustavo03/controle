@@ -116,13 +116,13 @@ export default function Almoxarifados() {
 
   if(active) return (
     <AlmoxarifadoContext.Provider value={{ item, setItemData, updateListAlmoxarifados, altAlmoxarifado, modalType, closeModal, openDelete, closeDelete }}>
-      <div id="page-almoxarifado" className="min-h-screen bg-gray-200">
+      <div id="page-almoxarifado" className="min-h-screen pb-10 bg-gray-200">
 
 
         <Header />
 
 
-        <div id="content" className="flex flex-col mt-10 px-2 md:px-10">
+        <div id="content" className="flex flex-col my-10 px-2 md:px-10">
 
           <div id="middle" className="flex flex-col border rounded-md md:rounded-lg bg-white pb-5">
             <div id="middle-top" className="h-[70px] flex flex-row justify-between items-center p-4 md:p-6 border-b border-gray-200">

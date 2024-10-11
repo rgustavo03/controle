@@ -67,7 +67,7 @@ export const Fornecedores = ({exec}) => {
 
   return (
     <FornecedoresContext.Provider value={{item, setItemData, openDelete, closeDelete}}>
-      <div id="page-fornecedores" className="min-h-screen bg-gray-200">
+      <div id="page-fornecedores" className="min-h-screen pb-10 bg-gray-200">
 
 
         <Header />

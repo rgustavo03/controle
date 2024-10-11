@@ -25,7 +25,6 @@ export const ListFornecedores = ({listOn, exec}) => {
   }, [exec]);
 
 
-
   function updateListFornecedores() {
     getFornecedores(getToken(), user.id, navigate, handleSetList);
   }

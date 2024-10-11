@@ -31,7 +31,7 @@ const fornecedorSchema = z.object({
   rgInscricaoEstadual: z.string().min(1),
   inscricaoMunicipal: z.string().min(1),
   crt: z.coerce.number().min(1),
-  optanteSimples: z.coerce.number().min(1),
+  optanteSimples: z.coerce.number().min(0),
   cep: z.string().min(1),
   uf: z.coerce.number().min(1),
   cidade: z.string().min(1),
@@ -42,7 +42,7 @@ const fornecedorSchema = z.object({
   codigoIbge: z.coerce.number().min(0),
   atividade: z.coerce.number().min(1),
   limiteCredito: z.coerce.number().min(0),
-  liberado: z.coerce.number().min(1),
+  liberado: z.coerce.number().min(0),
   desconto: z.coerce.number().min(0),
   formaPagamentoId: z.string().min(1),
   condicaoPagamentoId: z.string().min(1),
@@ -121,7 +121,7 @@ export const FormFornecedor = ({formOn, exec}) => {
   }
 
 
-  // ==============
+  // --------------
 
 
   function submit(data) {
@@ -134,17 +134,21 @@ export const FormFornecedor = ({formOn, exec}) => {
   }
 
 
-  // ==============
+  // --------------
 
 
   function create(data) {
 
     console.log("new");
+    console.log("exec", exec);
 
     const dataFiltered = filterFornecedor("new", data, user.id);
 
     createFornecedor(dataFiltered, getToken(), navigate);
   }
+
+
+  // --------------
 
 
   function alt(data) {
@@ -155,8 +159,9 @@ export const FormFornecedor = ({formOn, exec}) => {
     }
 
     console.log("alt");
+    console.log("exec", exec);
 
-    const dataFiltered = filterFornecedor("new", data, idFornecedor);
+    const dataFiltered = filterFornecedor("alt", data, idFornecedor);
 
     altFornecedor(dataFiltered, getToken(), navigate);
   }

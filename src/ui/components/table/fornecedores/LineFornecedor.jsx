@@ -1,11 +1,10 @@
 import React from "react";
 import { CellOptions } from "./CellOptions";
-import { tipos } from "../../../../data/almoxarifado";
 
 export const LineFornecedor = ({ item }) => {
 
 
-  const tipo = tipos.find(t => t.tipo == item.tipo);
+  //
 
 
   return (
