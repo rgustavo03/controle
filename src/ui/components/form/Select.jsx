@@ -19,6 +19,7 @@ export const Select = ({label, list, register}) => {
         {...register}
         className="border border-gray-400 rounded p-2 text-base"
       >
+        <option disabled>{label}</option>
         {list.map(option => {
           //
           return (

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { LineItem } from "../../components/table/fornecedores/LineItem";
+import { LineFornecedor } from "../../components/table/fornecedores/LineFornecedor";
 
 
 
@@ -25,7 +25,7 @@ export const TableFornecedores = ({ list }) => {
       <tbody>
         {list.map(item => {
           return (
-            <LineItem key={item.id} item={item} />
+            <LineFornecedor key={item.id} item={item} />
           )
         })}
       </tbody>

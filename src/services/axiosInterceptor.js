@@ -9,7 +9,7 @@ const axiosInterceptor = (navigate) => {
         localStorage.removeItem('session');
         navigate('/'); 
       }
-      console.log(error); 
+      //console.log(error); 
     }
   );
 

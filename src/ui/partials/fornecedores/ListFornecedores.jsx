@@ -7,7 +7,7 @@ import { TableFornecedores } from "./TableFornecedores";
 import getFornecedores from "../../../services/fornecedores/getFornecedores";
 
 
-export const ListFornecedores = ({listOn}) => {
+export const ListFornecedores = ({listOn, exec}) => {
 
   const navigate = useNavigate();
 
@@ -19,13 +19,15 @@ export const ListFornecedores = ({listOn}) => {
 
 
   useEffect(() => {
-    updateListFornecedores();
-  }, []);
+    if(exec == "list") {
+      updateListFornecedores();
+    }
+  }, [exec]);
 
 
 
   function updateListFornecedores() {
-    getFornecedores(getToken(), user.id, handleSetList, navigate);
+    getFornecedores(getToken(), user.id, navigate, handleSetList);
   }
 
 

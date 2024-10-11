@@ -76,9 +76,9 @@ export const Fornecedores = ({exec}) => {
         {/*  Conteúdo  */}
         <div id="content" className="flex flex-col my-10 px-2 md:px-10">
 
-          <ListFornecedores listOn={listOn} /> 
+          <ListFornecedores listOn={listOn} exec={exec} />
 
-          <FormFornecedor formOn={formOn} exec={exec} /> 
+          <FormFornecedor formOn={formOn} exec={exec} />
 
         </div>
         {/*  Conteúdo  */}

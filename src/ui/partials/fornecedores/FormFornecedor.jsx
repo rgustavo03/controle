@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom";
-import { FornecedoresContext } from "../../../context/fornecedoresContext";
 import { UserContext } from "../../../context/userContext";
 import { Box } from "../../components/form/Box";
 import { Input } from "../../components/form/Input";
@@ -14,35 +13,37 @@ import { Select } from "../../components/form/Select";
 import { atividades, liberado, municipioEmpty, optanteSimples, tiposPessoa, ufs } from "../../../data/fornecedores";
 import { SelectUf } from "../../components/form/SelectUf";
 import { getMunicipios } from "../../../services/fornecedores/getMunicipios";
+import { getItemFornecedor } from "../../../services/fornecedores/getItemFornecedor";
+import useSession from "../../../hooks/useSession";
+import createFornecedor from "../../../services/fornecedores/createFornecedor";
 
 
-// coerce.number()
 const fornecedorSchema = z.object({
-  nomeRazaoSocial: z.string(),
-  nomeFantasia: z.string(),
-  tipo: z.coerce.number(),
-  cpfCnpj: z.string(),
-  numeroPisPasepNit: z.string(),
-  email: z.string(),
-  telefone: z.string(),
-  rgInscricaoEstadual: z.string(),
-  inscricaoMunicipal: z.string(),
-  crt: z.coerce.number(),
-  optanteSimples: z.coerce.number(),
-  cep: z.string(),
-  uf: z.coerce.number(),
-  cidade: z.string(),
-  bairro: z.string(),
-  logradouro: z.string(),
-  numero: z.string(),
-  complemento: z.string(),
-  codigoIbge: z.coerce.number(),
-  atividade: z.coerce.number(),
-  limiteCredito: z.coerce.number(),
-  liberado: z.coerce.number(),
-  desconto: z.coerce.number(),
-  formaPagamentoId: z.string(),
-  condicaoPagamentoId: z.string()
+  nomeRazaoSocial: z.string().min(1),
+  nomeFantasia: z.string().min(1),
+  tipo: z.coerce.number().min(1),
+  cpfCnpj: z.string().min(1),
+  numeroPisPasepNit: z.string().min(1),
+  email: z.string().min(1),
+  telefone: z.string().min(1),
+  rgInscricaoEstadual: z.string().min(1),
+  inscricaoMunicipal: z.string().min(1),
+  crt: z.coerce.number().min(1),
+  optanteSimples: z.coerce.number().min(1),
+  cep: z.string().min(1),
+  uf: z.coerce.number().min(1),
+  cidade: z.string().min(1),
+  bairro: z.string().min(1),
+  logradouro: z.string().min(1),
+  numero: z.string().min(1),
+  complemento: z.string().min(1),
+  codigoIbge: z.coerce.number().min(0),
+  atividade: z.coerce.number().min(1),
+  limiteCredito: z.coerce.number().min(0),
+  liberado: z.coerce.number().min(1),
+  desconto: z.coerce.number().min(0),
+  formaPagamentoId: z.string().min(1),
+  condicaoPagamentoId: z.string().min(1),
 });
 
 
@@ -50,34 +51,38 @@ export const FormFornecedor = ({formOn, exec}) => {
 
   const navigate = useNavigate();
 
-  const { idParam } = useParams();
-
-  const { item, setItemData } = useContext(FornecedoresContext); // ao invés de item context, getItemFornecedor();
+  const { id } = useParams();
 
   const { user } = useContext(UserContext);
 
-  const [holder, setHolder] = useState(initialHolder);
+  const { getToken } = useSession();
+
+  const [ itemAlt, setItemAlt ] = useState({});
+
+  const [ holder, setHolder ] = useState(initialHolder);
 
 
   // ==============
 
-  /*
-  function updateListFornecedores() {
-    getFornecedores(getToken(), user.id, handleSetList, navigate);
+
+  function setItemAltData(itemData) {
+    setItemAlt(itemData);
   }
-  */
-
-  // ==============
 
 
   useEffect(() => {
-    /*
-    if(exec == "alt") { TEM PROBLEMA NESSE MÉTODO
-      // setItemData(getItemFornecedor(idParam));
-      setHolder(setHolderValues(item));
+
+    if(exec == "alt") {
+      getItemFornecedor(id, user.id, getToken(), navigate, setItemAltData); // (..., itemAlt);
     }
-    */
+
   }, [exec]);
+
+
+  useEffect(() => {
+    setHolder(setHolderValues(itemAlt));
+    console.log(itemAlt);
+  }, [itemAlt]);
 
 
   // ==============
@@ -91,36 +96,39 @@ export const FormFornecedor = ({formOn, exec}) => {
   // ==============
 
 
-  const [uf, setUf] = useState(0);
-
   const [municipios, setMunicipios] = useState([municipioEmpty]);
 
   function handleChangeUf(event) {
     const uf = event.target.value;
-    ufs.forEach(u => {
-      if(u.key === uf) {
-        setUf(u.key);
-      }
-    });
+    listMunicipios(uf);
   }
 
-  useEffect(() => {
-    const municipiosList = getMunicipios(uf);
-    console.log('uf')
-    //setMunicipios(municipiosList);
-  }, [uf]);
+  function listMunicipios(uf) {
+    getMunicipios(uf, saveMunicipios);
+  }
+
+  function saveMunicipios(list) {
+    setMunicipios(list);
+  }
+
+
+  // ==============
+
+
+  function cancel() {
+    navigate('/fornecedores');
+  }
 
 
   // ==============
 
 
   function submit(data) {
-
     const dataFiltered = {
       empresaId: user.id,
       nomeRazaoSocial: data.nomeRazaoSocial,
       nomeFantasia: data.nomeFantasia,
-      tipo: data.tipo, // number select
+      tipo: data.tipo, // number
       cpfCnpj: data.cpfCnpj,
       numeroPisPasepNit: data.numeroPisPasepNit,
       email: data.email,
@@ -154,9 +162,13 @@ export const FormFornecedor = ({formOn, exec}) => {
   }
 
 
+  // ==============
+
+
   function create(data) {
-    console.log(data);
     console.log("create");
+    console.log(data);
+    createFornecedor(data, getToken(), navigate);
   }
 
 
@@ -166,9 +178,6 @@ export const FormFornecedor = ({formOn, exec}) => {
   }
 
 
-  function cancel() {
-    navigate('/fornecedores');
-  }
 
 
 
@@ -194,7 +203,7 @@ export const FormFornecedor = ({formOn, exec}) => {
                 <Input label="Razão Social" type="text" placeholder={holder.nomeRazaoSocial} register={{...register("nomeRazaoSocial")}} />
               </div>
               <div className="flex-1">
-                <Input label="Nome Fantasia" type="text" placeholder={holder.nomeFantasia} register={{...register("nomeFantasia")}} />
+                <Input label="Nome Fantasia" type="text" placeholder="Nome Fantasia" register={{...register("nomeFantasia")}} />
               </div>
             </div>
 
@@ -206,7 +215,7 @@ export const FormFornecedor = ({formOn, exec}) => {
                 <Input label="CPF / CNPJ" type="text" placeholder={holder.cpfCnpj} register={{...register("cpfCnpj")}} />
               </div>
               <div className="grow-[4]">
-                <Input label="PIS Pasep NIT" type="text" placeholder={holder.numeroPisPasepNit} register={{...register("numeroPisPasepNit")}} />
+                <Input label="PIS Pasep NIT" type="text" placeholder="PIS Pasep NIT" register={{...register("numeroPisPasepNit")}} />
               </div>
             </div>
 
@@ -215,22 +224,22 @@ export const FormFornecedor = ({formOn, exec}) => {
                 <Input label="Email" type="text" placeholder={holder.email} register={{...register("email")}} />
               </div>
               <div className="flex-2">
-                <Input label="Telefone" type="text" placeholder={holder.telefone} register={{...register("telefone")}} />
+                <Input label="Telefone" type="text" placeholder={holder.numeroTelefone} register={{...register("telefone")}} />
               </div>
             </div>
 
             <div className="flex flex-col md:flex-row gap-3">
               <div className="flex-1">
-                <Input label="Rg Inscrição Estadual" type="text" placeholder={holder.rgInscricaoEstadual} register={{...register("rgInscricaoEstadual")}} />
+                <Input label="Rg Inscrição Estadual" type="text" placeholder="Rg Inscrição Estudual" register={{...register("rgInscricaoEstadual")}} />
               </div>
               <div className="flex-1">
-                <Input label="Inscrição Municipal" type="text" placeholder={holder.inscricaoMunicipal} register={{...register("inscricaoMunicipal")}} />
+                <Input label="Inscrição Municipal" type="text" placeholder="Inscrição Municipal" register={{...register("inscricaoMunicipal")}} />
               </div>
             </div>
 
             <div className="flex flex-col md:flex-row gap-3">
               <div className="flex-1">
-                <Input label="CRT" type="text" placeholder={holder.crt} register={{...register("crt")}} />
+                <Input label="CRT" type="text" placeholder="CRT" register={{...register("crt")}} />
               </div>
               <div className="flex-2">
                 <Select label="Optante Simples" list={optanteSimples} register={{...register("optanteSimples")}} />
@@ -245,21 +254,21 @@ export const FormFornecedor = ({formOn, exec}) => {
 
             <div className="flex flex-col md:flex-row gap-3">
               <div className="flex-1 flex flex-row gap-3">
-                <Input label="CEP" type="text" placeholder={holder.cep} register={{...register("cep")}} />
+                <Input label="CEP" type="text" placeholder="CEP" register={{...register("cep")}} />
                 <SelectUf label="UF" list={ufs} register={{...register("uf")}} handleChange={handleChangeUf} />
               </div>
-              <Input label="Cidade" type="text" placeholder={holder.cidade} register={{...register("cidade")}} />
+              <Select label="Cidades" list={municipios} register={{...register("cidade")}} />
             </div>
 
             <div className="flex flex-col md:flex-row gap-3">
-              <Input label="Bairro" type="text" placeholder={holder.bairro} register={{...register("bairro")}} />
-              <Input label="Logradouro" type="text" placeholder={holder.logradouro} register={{...register("logradouro")}} />
+              <Input label="Bairro" type="text" placeholder="Bairro" register={{...register("bairro")}} />
+              <Input label="Logradouro" type="text" placeholder="Logradouro" register={{...register("logradouro")}} />
             </div>
 
             <div className="flex flex-col md:flex-row gap-3">
-              <Input label="Número" type="text" placeholder={holder.numero} register={{...register("numero")}} />
-              <Input label="Complemento" type="text" placeholder={holder.complemento} register={{...register("complemento")}} />
-              <Input label="Código Ibge" type="text" placeholder={holder.codigoIbge} register={{...register("codigoIbge")}} />
+              <Input label="Número" type="text" placeholder="n°" register={{...register("numero")}} />
+              <Input label="Complemento" type="text" placeholder="Complemento" register={{...register("complemento")}} />
+              <Input label="Código Ibge" type="text" placeholder="Código Ibge" register={{...register("codigoIbge")}} />
             </div>
 
           </div>
@@ -270,12 +279,12 @@ export const FormFornecedor = ({formOn, exec}) => {
 
             <div className="flex flex-col md:flex-row gap-3">
               <Select label="Atividade" list={atividades} register={{...register("atividade")}} />
-              <Input label="Limite Crédito" type="text" placeholder={holder.limiteCredito} register={{...register("limiteCredito")}} />
+              <Input label="Limite Crédito" type="text" placeholder="Limite Crédito" register={{...register("limiteCredito")}} />
             </div>
 
             <div className="flex flex-col md:flex-row gap-3">
               <Select label="Liberado" list={liberado} register={{...register("liberado")}} />
-              <Input label="Desconto" type="text" placeholder={holder.desconto} register={{...register("desconto")}} />
+              <Input label="Desconto" type="text" placeholder="Desconto" register={{...register("desconto")}} />
             </div>
 
             <div className="flex flex-col md:flex-row gap-3">
@@ -303,31 +312,7 @@ export const FormFornecedor = ({formOn, exec}) => {
 
 
 /*
-const fornecedorSchema = z.object({
-  nomeRazaoSocial: z.string().min(1),
-  nomeFantasia: z.string().min(1),
-  tipo: z.coerce.number().min(1),
-  cpfCnpj: z.string().min(1),
-  numeroPisPasepNit: z.string().min(1),
-  email: z.string().min(1),
-  telefone: z.string().min(1),
-  rgInscricaoEstadual: z.string().min(1),
-  inscricaoMunicipal: z.string().min(1),
-  crt: z.coerce.number().min(1),
-  optanteSimples: z.coerce.number().min(1),
-  cep: z.string().min(1),
-  uf: z.coerce.number().min(1),
-  cidade: z.string().min(1),
-  bairro: z.string().min(1),
-  logradouro: z.string().min(1),
-  numero: z.string().min(1),
-  complemento: z.string().min(1),
-  codigoIbge: z.coerce.number().min(1),
-  atividade: z.coerce.number().min(1),
-  limiteCredito: z.coerce.number().min(1),
-  liberado: z.coerce.number().min(1),
-  desconto: z.coerce.number().min(1),
-  formaPagamentoId: z.string().min(1),
-  condicaoPagamentoId: z.string().min(1),
-});
+
 */
+
+

@@ -20,6 +20,7 @@ export const SelectUf = ({label, list, register, handleChange}) => {
         onChange={handleChange}
         className="border border-gray-400 rounded p-2 text-base"
       >
+        <option disabled selected >{label}</option>
         {list.map(option => {
           //
           return (

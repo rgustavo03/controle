@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { LineItem } from "../../components/table/almoxarifado/LineItem";
+import { LineAlmoxarifado } from "../../components/table/almoxarifado/LineAlmoxarifado";
 
 export const TableAlmoxarifado = ({ list }) => {
 
@@ -23,12 +23,10 @@ export const TableAlmoxarifado = ({ list }) => {
       <tbody>
         {list.map(item => {
           return (
-            <LineItem key={item.id} item={item} />
+            <LineAlmoxarifado key={item.id} item={item} />
           )
         })}
       </tbody>
     </table>
   )
 }
-
-// <LineItem key item   excluir   alterar   />

@@ -2,7 +2,7 @@ import React from "react";
 import { CellOptions } from "./CellOptions";
 import { tipos } from "../../../../data/almoxarifado";
 
-export const LineItem = ({ item }) => {
+export const LineFornecedor = ({ item }) => {
 
 
   const tipo = tipos.find(t => t.tipo == item.tipo);
@@ -16,11 +16,23 @@ export const LineItem = ({ item }) => {
       </td>
 
       <td className="cell-table-almoxarifado">
-        {item.descricao}
+        {item.nomeRazaoSocial}
       </td>
 
       <td className="cell-table-almoxarifado">
-        {tipo?.nome}
+        {item.cpfCnpj}
+      </td>
+
+      <td className="cell-table-almoxarifado">
+        {item.email}
+      </td>
+
+      <td className="cell-table-almoxarifado">
+        {item.numeroTelefone}
+      </td>
+
+      <td className="cell-table-almoxarifado">
+        {item.ativo? "Sim" : "Não"}
       </td>
 
       <td className="cell-table-almoxarifado relative w-[50px] sm:w-[70px]">
@@ -30,19 +42,3 @@ export const LineItem = ({ item }) => {
     </tr>
   )
 }
-
-
-/*
-"data": [
-  {
-    "id": 1,
-    "empresaId": 1,
-    "descricao": "PRINCIPAL",
-    "tipo": 1,
-    "usuarioId": 0,
-    "dataInclusao": "2024-08-20T01:25:16.643044",
-    "dataAlteracao": null,
-    "dataExclusao": null
-  }
-]
-*/

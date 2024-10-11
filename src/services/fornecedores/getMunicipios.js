@@ -1,8 +1,9 @@
 import axios from "axios";
 
 
-export async function getMunicipios(uf) {
+export async function getMunicipios(uf, saveMunicipios) {
 
+  const listMunicipios = [];
 
   try {
     await axios.get(
@@ -10,8 +11,14 @@ export async function getMunicipios(uf) {
     )
     .then(res => {
 
-      console.log(res.data);
-      //return response.data
+      // Salvando em listMunicipios
+      res.data.map(m => {
+        listMunicipios.push(
+          { key: m.id, label: m.nome, value: m.nome }
+        );
+      });
+
+      saveMunicipios(listMunicipios);
 
     })
     .catch(error => {

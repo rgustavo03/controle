@@ -1,6 +1,6 @@
 import axiosInterceptor from "../axiosInterceptor";
 
-export default async function getFornecedores(token, idUsuario, handleSetList, navigate) {
+export default async function getFornecedores(token, idUsuario, navigate, handleSetList) {
 
   // @ts-ignore
   const apiURL = import.meta.env.VITE_API_FORNECEDORES;

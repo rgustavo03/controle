@@ -1,6 +1,6 @@
 import axiosInterceptor from "../axiosInterceptor";
 
-export default async function createFornecedor(data, token, updateListFornecedores, navigate) {
+export default async function createFornecedor(data, token, navigate) {
 
   // @ts-ignore
   const apiUrl = import.meta.env.VITE_API_FORNECEDORES;
@@ -18,7 +18,7 @@ export default async function createFornecedor(data, token, updateListFornecedor
       console.log(res.data);
       
       if(res.data.status == 200) {
-        updateListFornecedores();
+        navigate('/fornecedores');
       }
 
     })
