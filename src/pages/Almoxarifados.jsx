@@ -126,7 +126,7 @@ export default function Almoxarifados() {
 
           <div id="middle" className="flex flex-col border rounded-md md:rounded-lg bg-white pb-5">
             <div id="middle-top" className="h-[70px] flex flex-row justify-between items-center p-4 md:p-6 border-b border-gray-200">
-              <h3 className="text-lg text-gray-700 font-semibold">Almoxarifados</h3>
+              <h3 className="text-md text-gray-700 font-semibold">Almoxarifados</h3>
               <Button type="add" func={newAlmoxarifado} name="Novo +" />
             </div>
 

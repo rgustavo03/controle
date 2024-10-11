@@ -8,6 +8,7 @@ export default async function createFornecedor(data, token, navigate) {
   const axios = axiosInterceptor(navigate);
 
   try {
+
     await axios.post(
       `${apiUrl}/criar`,
       data,
@@ -25,8 +26,10 @@ export default async function createFornecedor(data, token, navigate) {
     .catch(error => {
 
       console.log(error);
+      alert('Falha ao cadastrar fornecedor.');
 
     });
+
   }
   catch (error) {
 

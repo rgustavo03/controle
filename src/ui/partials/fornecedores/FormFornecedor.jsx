@@ -12,10 +12,12 @@ import { Button } from "../../components/Button";
 import { Select } from "../../components/form/Select";
 import { atividades, liberado, municipioEmpty, optanteSimples, tiposPessoa, ufs } from "../../../data/fornecedores";
 import { SelectUf } from "../../components/form/SelectUf";
-import { getMunicipios } from "../../../services/fornecedores/getMunicipios";
+import { getMunicipios } from "../../../services/getMunicipios";
 import { getItemFornecedor } from "../../../services/fornecedores/getItemFornecedor";
 import useSession from "../../../hooks/useSession";
+import filterFornecedor from "../../../services/fornecedores/filterFornecedor";
 import createFornecedor from "../../../services/fornecedores/createFornecedor";
+import altFornecedor from "../../../services/fornecedores/altFornecedor";
 
 
 const fornecedorSchema = z.object({
@@ -51,7 +53,7 @@ export const FormFornecedor = ({formOn, exec}) => {
 
   const navigate = useNavigate();
 
-  const { id } = useParams();
+  const { idFornecedor } = useParams();
 
   const { user } = useContext(UserContext);
 
@@ -73,7 +75,7 @@ export const FormFornecedor = ({formOn, exec}) => {
   useEffect(() => {
 
     if(exec == "alt") {
-      getItemFornecedor(id, user.id, getToken(), navigate, setItemAltData); // (..., itemAlt);
+      getItemFornecedor(idFornecedor, user.id, getToken(), navigate, setItemAltData); // (..., itemAlt);
     }
 
   }, [exec]);
@@ -81,7 +83,6 @@ export const FormFornecedor = ({formOn, exec}) => {
 
   useEffect(() => {
     setHolder(setHolderValues(itemAlt));
-    console.log(itemAlt);
   }, [itemAlt]);
 
 
@@ -124,40 +125,11 @@ export const FormFornecedor = ({formOn, exec}) => {
 
 
   function submit(data) {
-    const dataFiltered = {
-      empresaId: user.id,
-      nomeRazaoSocial: data.nomeRazaoSocial,
-      nomeFantasia: data.nomeFantasia,
-      tipo: data.tipo, // number
-      cpfCnpj: data.cpfCnpj,
-      numeroPisPasepNit: data.numeroPisPasepNit,
-      email: data.email,
-      telefone: data.telefone,
-      rgInscricaoEstadual: data.rgInscricaoEstadual,
-      inscricaoMunicipal: data.inscricaoMunicipal,
-      crt: data.crt, // number
-      optanteSimples: (data.optanteSimples == 1) ? true : (data.optanteSimples == 0 && false),
-      cep: data.cep,
-      uf: data.uf, // number select
-      cidade: data.cidade, // select
-      bairro: data.bairro,
-      logradouro: data.logradouro,
-      numero: data.numero,
-      complemento: data.complemento,
-      codigoIbge: data.codigoIbge, // number
-      atividade: data.atividade, // number select
-      limiteCredito: data.limiteCredito, // number
-      liberado: (data.liberado == 1) ? true : (data.liberado == 0 && false), // select
-      desconto: data.desconto, // number
-      formaPagamentoId: null, // data.formaPagamentoId (posteriormente)
-      condicaoPagamentoId: null // data.condicaoPagamentoId (posteriormente)
-    };
-
     if(exec == "new") {
-      create(dataFiltered);
+      create(data);
     }
     if(exec == "alt") {
-      alt(dataFiltered);
+      alt(data);
     }
   }
 
@@ -166,15 +138,27 @@ export const FormFornecedor = ({formOn, exec}) => {
 
 
   function create(data) {
-    console.log("create");
-    console.log(data);
-    createFornecedor(data, getToken(), navigate);
+
+    console.log("new");
+
+    const dataFiltered = filterFornecedor("new", data, user.id);
+
+    createFornecedor(dataFiltered, getToken(), navigate);
   }
 
 
   function alt(data) {
-    console.log(data);
+
+    if(!idFornecedor) {
+      alert("Falha ao identificar fornecedor");
+      return
+    }
+
     console.log("alt");
+
+    const dataFiltered = filterFornecedor("new", data, idFornecedor);
+
+    altFornecedor(dataFiltered, getToken(), navigate);
   }
 
 
@@ -308,11 +292,3 @@ export const FormFornecedor = ({formOn, exec}) => {
     </form>
   )
 }
-
-
-
-/*
-
-*/
-
-

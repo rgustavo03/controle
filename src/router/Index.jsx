@@ -26,7 +26,7 @@ export default function Index() {
       element: <Fornecedores exec="new" />
     },
     {
-      path: '/fornecedores/form/:id',
+      path: '/fornecedores/form/:idFornecedor',
       element: <Fornecedores exec="alt" />
     }
   ]);
