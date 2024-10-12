@@ -7,7 +7,7 @@ import { LineFornecedor } from "../../components/table/fornecedores/LineForneced
 export const TableFornecedores = ({ list }) => {
 
 
-  const headers = ["Id", "Razão Social", "CPF / CNPJ", "Email", "Telefone", "Ativo", ""];
+  const headers = ["Id", "Razão Social", "CPF / CNPJ", "", ""];
 
 
   return (

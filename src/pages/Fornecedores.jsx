@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { emptyItem, FornecedoresContext } from "../context/fornecedoresContext"
 import Header from "../ui/partials/Header"
 import { useNavigate } from "react-router-dom";
@@ -6,11 +6,32 @@ import { Delete } from "../ui/partials/Delete";
 import { DelFornecedor } from "../ui/partials/fornecedores/DelFornecedor";
 import { ListFornecedores } from "../ui/partials/fornecedores/ListFornecedores";
 import { FormFornecedor } from "../ui/partials/fornecedores/FormFornecedor";
+import useSession from "../hooks/useSession";
+import getFornecedores from "../services/fornecedores/getFornecedores";
+import { UserContext } from "../context/userContext";
 
 
 export const Fornecedores = ({exec}) => {
 
   const navigate = useNavigate();
+
+  const { getToken } = useSession();
+
+  const { user } = useContext(UserContext);
+
+
+  // ==============
+
+
+  const [list, setList] = useState([]); // list fornecedores
+
+  function updateListFornecedores() {
+    getFornecedores(getToken(), user.id, navigate, handleSetList); // api axios
+  }
+
+  function handleSetList(data) { // Essa função é chamada em getFornecedores
+    setList(data);
+  }
 
 
   // ==============
@@ -66,7 +87,7 @@ export const Fornecedores = ({exec}) => {
 
 
   return (
-    <FornecedoresContext.Provider value={{item, setItemData, openDelete, closeDelete}}>
+    <FornecedoresContext.Provider value={{list, updateListFornecedores, item, setItemData, openDelete, closeDelete}}>
       <div id="page-fornecedores" className="min-h-screen pb-10 bg-gray-200">
 
 

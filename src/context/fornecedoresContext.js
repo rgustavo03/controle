@@ -33,8 +33,10 @@ export const emptyItem = {
 
 // fazer tipagem de uma forma não typescript ;---;
 const initialState = {
+  list: [{}],
+  updateListFornecedores: (a) => {},
   item: emptyItem,
-  setItemData: (emptyItem) => {},
+  setItemData: () => {},
   openDelete: () => {},
   closeDelete: () => {},
 };

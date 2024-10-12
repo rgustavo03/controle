@@ -1,21 +1,15 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect } from "react"
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../../context/userContext";
-import useSession from "../../../hooks/useSession";
 import { Button } from "../../components/Button";
 import { TableFornecedores } from "./TableFornecedores";
-import getFornecedores from "../../../services/fornecedores/getFornecedores";
+import { FornecedoresContext } from "../../../context/fornecedoresContext";
 
 
 export const ListFornecedores = ({listOn, exec}) => {
 
   const navigate = useNavigate();
 
-  const { user } = useContext(UserContext);
-
-  const { getToken } = useSession();
-
-  const [list, setList] = useState([]);
+  const { list, updateListFornecedores } = useContext(FornecedoresContext);
 
 
   useEffect(() => {
@@ -25,19 +19,10 @@ export const ListFornecedores = ({listOn, exec}) => {
   }, [exec]);
 
 
-  function updateListFornecedores() {
-    getFornecedores(getToken(), user.id, navigate, handleSetList);
-  }
-
-
-  function handleSetList(data) {
-    setList(data);
-  }
-
-
   function newFornecedor() {
     navigate('/fornecedores/form');
   }
+
 
 
   if(listOn) return (
