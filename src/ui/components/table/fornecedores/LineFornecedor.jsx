@@ -41,13 +41,13 @@ export const LineFornecedor = ({ item }) => {
 
 
         <div className={`absolute top-full left-0 w-full ${(!more) && 'opacity-0'} ${transition} flex flex-row`}>
-          <div className="flex flex-col gap-4 items-end px-5">
+          <div className="flex flex-col gap-4 items-end px-6">
             <h6 className="text-[15px] font-semibold text-gray-800">Ativo</h6>
             <h6 className="font-semibold text-gray-800">Email</h6>
             <h6 className="text-[15px] font-semibold text-gray-800">Telefone</h6>
           </div>
 
-          <div className="flex flex-col gap-4 items-start px-5">
+          <div className="flex flex-col gap-4 items-start">
             <span>{item.ativo? "Sim" : "Não"}</span>
             <span>{item.email? (item.email) : "*"}</span>
             <span>{item.numeroTelefone?(item.numeroTelefone) : "*"}</span>
