@@ -18,6 +18,7 @@ export const LineFornecedor = ({ item }) => {
   return (
     <>
       <tr className={`relative h-[50px] text-[15px] sm:text-[16px]   ${(!more) && 'border-b border-neutral-200'}   `}>
+        
         <td className="cell-table-almoxarifado">
           {item.id}
         </td>
@@ -39,26 +40,23 @@ export const LineFornecedor = ({ item }) => {
         </td>
 
 
-        <div className={`absolute top-full left-0 h-[70px] w-full ${(!more) && 'opacity-0'} ${transition} flex flex-row gap-7`}>
-          <div className="flex-1 flex flex-col">
+        <div className={`absolute top-full left-0 w-full ${(!more) && 'opacity-0'} ${transition} flex flex-row`}>
+          <div className="flex flex-col gap-4 items-end px-5">
             <h6 className="text-[15px] font-semibold text-gray-800">Ativo</h6>
-            <span>{item.ativo? "Sim" : "Não"}</span>
-          </div>
-
-          <div className="flex-1 flex flex-col">
             <h6 className="font-semibold text-gray-800">Email</h6>
-            <span>{item.email}</span>
+            <h6 className="text-[15px] font-semibold text-gray-800">Telefone</h6>
           </div>
 
-          <div className="flex-1 flex flex-col">
-            <h6 className="text-[15px] font-semibold text-gray-800">Telefone</h6>
-            <span>{item.numeroTelefone}</span>
-          </div>
+          <div className="flex flex-col gap-4 items-start px-5">
+            <span>{item.ativo? "Sim" : "Não"}</span>
+            <span>{item.email? (item.email) : "*"}</span>
+            <span>{item.numeroTelefone?(item.numeroTelefone) : "*"}</span>
+          </div>          
         </div>
 
       </tr>
 
-      <tr className={`${(more) ? 'h-[70px] border-b border-neutral-200' : 'h-0'} ${transition}`}></tr>
+      <tr className={`${(more) ? 'h-[120px] border-b border-neutral-200' : 'h-0'} ${transition}`}></tr>
     </>
   )
 }

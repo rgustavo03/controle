@@ -11,7 +11,7 @@ export const TableFornecedores = ({ list }) => {
 
 
   return (
-    <table>
+    <table className="overflow-hidden">
       <thead>
         <tr className="">
           {headers.map(header => {

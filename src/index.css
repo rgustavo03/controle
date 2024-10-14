@@ -15,3 +15,41 @@ input {
 .cell-table-almoxarifado {
   text-align: center;
 }
+
+
+
+
+
+.line-fornecedor {
+  height: 75px;
+  animation: slideInOut 0.5s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+}
+.show-less-line {
+  display: none;
+}
+.show-more-line {
+  height: 75px;
+  opacity: 1;
+  visibility: visible;
+}
+
+
+@keyframes slideInOut {
+  0% {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-20px);
+  }
+
+  50% {
+      opacity: 0.5;
+      visibility: visible;
+  }
+
+  100% {
+      opacity: 1;
+      visibility: visible;
+  }
+}
